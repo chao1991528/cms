@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>欢迎登录后台管理系统</title>
@@ -27,25 +27,53 @@
             <span class="systemlogo"></span> 
             <div class="loginbox loginbox1">
                 <ul>
-                    <li><input name="" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value = ''"/></li>
-                    <li><input name="" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value = ''"/></li>
+                    <li><input name="username" type="text" class="loginuser" placeholder="用户名"/></li>
+                    <li><input name="pwd" type="password" class="loginpwd" placeholder="密码"/></li>
                     <li class="yzm">
-                        <span><input name="" type="text" value="验证码" onclick="JavaScript:this.value = ''"/></span><cite>X3D5S</cite> 
+                        <!--<img src="{:url('/verify')}" alt="captcha" />-->
+                        <span><input name="yzm" type="text" placeholder="验证码"/></span><img src="/verify.html" alt="captcha" onclick="JavaScript:this.src = '/verify.html?'+Math.random()"/> 
                     </li>
-                    <li><input name="" type="button" class="loginbtn" value="登录"  onclick="javascript:window.location = 'main.html'"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
+                    <li>
+                        <input name="" type="button" class="loginbtn" value="登录" />
+                        <label><input name="" type="checkbox" value="" checked="checked" />记住密码</label>
+                        <label><a href="#">忘记密码？</a></label>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="loginbm">版权所有,翻版必究</div>
     </body>
-    {load href="/static/js/jquery.js" /}
+    {load href="/static/js/jquery.min.js" /}
     {load href="/static/js/cloud.js" /}
+    {load href="/static/layer/layer.js" /}
     <script language="javascript">
         $(function () {
             $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});
             $(window).resize(function () {
                 $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});
-            })
+            });
+            $('.loginbtn').click(function(){
+                var username = $("input[name='username']").val();
+                var pwd = $("input[name='pwd']").val();
+                var yzm = $("input[name='yzm']").val();
+                if(username == ''){
+                    layer.msg('用户名不能为空',{time: 2000});
+                    return;
+                }
+                if(pwd == ''){
+                    layer.msg('密码不能为空',{time: 2000});
+                    return;
+                }
+                if(yzm == ''){
+                    layer.msg('验证码不能为空',{time: 2000});
+                    return;
+                }
+                $.post("/doLogin", { username: pwd, pwd: pwd, yzm:yzm },
+                    function(data) {
+                        alert(data);
+                    }
+                );
+            });                      
         });
     </script> 
 </html>

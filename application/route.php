@@ -10,5 +10,11 @@
 // +----------------------------------------------------------------------
 use think\Route;
 Route::get([
-        'login'=>'admin/index/login'
+        'login'=>'admin/Index/login',
+        'verify'=>'admin/Index/verify'
+    ]);
+
+Route::post([
+        'doLogin'=>'api/Index/doLogin',
+
     ]);

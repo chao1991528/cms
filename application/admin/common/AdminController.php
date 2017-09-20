@@ -1,11 +1,19 @@
 <?php
+
 namespace app\admin\common;
+
 use think\Controller;
-class AdminController extends Controller{
-    protected function loginNeed(){
-        if(!is_logined()){
+
+class AdminController extends Controller {
+
+    protected function _initialize() {
+        parent::_initialize();
+    }
+
+    protected function loginNeed() {
+        if (!is_logined()) {
             redirect('login');
         }
-    }        
-    
+    }
+
 }
