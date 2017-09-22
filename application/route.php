@@ -9,12 +9,17 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 use think\Route;
+
 Route::get([
-        'login'=>'admin/Index/login',
-        'verify'=>'admin/Index/verify'
-    ]);
+    'login' => 'admin/Index/login',
+    'verify' => 'admin/Index/verify',
+    'index' => 'admin/Index/index',
+    'left' => 'admin/Index/left',
+    'first' => 'admin/Index/first',
+    'userlist' => 'admin/User/ulist',
+]);
 
 Route::post([
-        'doLogin'=>'api/Index/doLogin',
-
-    ]);
+    'doLogin' => 'api/Index/doLogin',
+    'doLogout' => 'api/Index/doLogout',
+]);

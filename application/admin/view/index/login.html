@@ -30,8 +30,7 @@
                     <li><input name="username" type="text" class="loginuser" placeholder="用户名"/></li>
                     <li><input name="pwd" type="password" class="loginpwd" placeholder="密码"/></li>
                     <li class="yzm">
-                        <!--<img src="{:url('/verify')}" alt="captcha" />-->
-                        <span><input name="yzm" type="text" placeholder="验证码"/></span><img src="/verify.html" alt="captcha" onclick="JavaScript:this.src = '/verify.html?'+Math.random()"/> 
+                        <span><input name="yzm" type="text" placeholder="验证码"/></span><img src="/verify.html" alt="captcha" id="captcha" onclick="JavaScript:this.src = '/verify.html?'+Math.random()"/> 
                     </li>
                     <li>
                         <input name="" type="button" class="loginbtn" value="登录" />
@@ -68,9 +67,14 @@
                     layer.msg('验证码不能为空',{time: 2000});
                     return;
                 }
-                $.post("/doLogin", { username: pwd, pwd: pwd, yzm:yzm },
+                $.post("/doLogin", { username: username, pwd: pwd, yzm:yzm },
                     function(data) {
-                        alert(data);
+                        if(data.code === 200){
+                            window.location.href = "/index.html";
+                        }else{
+                            layer.msg(data.message,{time: 2000});
+                            $('#captcha').click();
+                        }
                     }
                 );
             });                      

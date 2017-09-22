@@ -205,7 +205,7 @@ return [
         // SESSION_ID的提交变量,解决flash上传跨域
         'var_session_id' => '',
         // SESSION 前缀
-        'prefix'         => 'admin',
+        'prefix'         => 'module',
         // 驱动方式 支持redis memcache memcached
         'type'           => '',
         // 是否自动开启 SESSION
@@ -238,4 +238,9 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    
+    'http_exception_template' => [
+        // 定义404错误的重定向页面地址
+        404 => APP_PATH . 'admin/view/404.html',
+    ]
 ];

@@ -4,9 +4,17 @@ use app\admin\common\AdminController;
 use think\captcha\Captcha;
 class Index extends AdminController
 {
+    protected $beforeActionList = [
+//        'loginNeed'
+        'loginNeed' => ['except' => 'login,verify'],
+    ];
+    
     //登录页面
     public function login()
     {
+        if(is_logined()){
+            $this->redirect('/index.html');
+        }
         return view('login');
     }
     
@@ -42,4 +50,24 @@ class Index extends AdminController
         return $captcha->entry();
     }
     
+    /**
+     * 首页
+     */
+    public function index(){
+        return view('index');
+    }
+    
+    /**
+     * 左侧菜单栏
+     */
+    public function left() {
+        return view('left');
+    }
+    
+    /**
+     * 登录后第一个页面
+     */
+    public function first(){
+        return view('first');
+    }
 }
