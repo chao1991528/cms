@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\admin\common\AdminController;
+use think\Db;
 
 class User extends AdminController {
 
