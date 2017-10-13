@@ -70,4 +70,18 @@ class Index extends AdminController
     public function first(){
         return view('first');
     }
+    
+    /**
+     * 登录后首页头部页面
+     */
+    public function top(){
+        return view('top');
+    }
+    
+     /**
+     * 登录后首页尾部页面
+     */
+    public function footer(){
+        return view('footer');
+    }
 }

@@ -14,7 +14,9 @@ Route::get([
     'login' => 'admin/Index/login',
     'verify' => 'admin/Index/verify',
     'index' => 'admin/Index/index',
+    'top' => 'admin/Index/top',
     'left' => 'admin/Index/left',
+    'footer' => 'admin/Index/footer',
     'first' => 'admin/Index/first',
     'userlist' => 'admin/User/ulist',
 ]);

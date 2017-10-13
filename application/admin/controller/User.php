@@ -14,7 +14,9 @@ class User extends AdminController {
     //用户列表页
     public function ulist() {
         $users = Db::name('user')->select();
-        return view('list');
+        return view('list', [
+            'users'  => $users
+        ]);
     }
 
 }
