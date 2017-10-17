@@ -11,14 +11,11 @@
 use think\Route;
 
 Route::get([
-    'login' => 'admin/Index/login',
-    'verify' => 'admin/Index/verify',
     'index' => 'admin/Index/index',
-    'top' => 'admin/Index/top',
-    'left' => 'admin/Index/left',
-    'footer' => 'admin/Index/footer',
-    'first' => 'admin/Index/first',
+    'verify' => 'admin/Index/verify',
     'userlist' => 'admin/User/ulist',
+    
+    'plist' => 'admin/Project/plist',
 ]);
 
 Route::post([

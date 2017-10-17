@@ -6,14 +6,14 @@ class Index extends AdminController
 {
     protected $beforeActionList = [
 //        'loginNeed'
-        'loginNeed' => ['except' => 'login,verify'],
+        'loginNeed' => ['except' => 'index,verify'],
     ];
     
     //登录页面
-    public function login()
+    public function index()
     {
         if(is_logined()){
-            $this->redirect('/index.html');
+            $this->redirect('/plist.html');
         }
         return view('login');
     }
@@ -23,9 +23,9 @@ class Index extends AdminController
      * @param string $page 页面
      * @return img
      */
-    public function verify($page='login'){
+    public function verify($page='index'){
         switch ($page) {
-            case 'login':
+            case 'index':
                 $config = [
                     // 验证码字体大小
                     'fontSize'    =>    30,    
@@ -51,13 +51,6 @@ class Index extends AdminController
     }
     
     /**
-     * 首页
-     */
-    public function index(){
-        return view('index');
-    }
-    
-    /**
      * 左侧菜单栏
      */
     public function left() {
@@ -71,17 +64,17 @@ class Index extends AdminController
         return view('first');
     }
     
-    /**
-     * 登录后首页头部页面
-     */
-    public function top(){
-        return view('top');
-    }
-    
-     /**
-     * 登录后首页尾部页面
-     */
-    public function footer(){
-        return view('footer');
-    }
+//    /**
+//     * 登录后首页头部页面
+//     */
+//    public function top(){
+//        return view('top');
+//    }
+//    
+//     /**
+//     * 登录后首页尾部页面
+//     */
+//    public function footer(){
+//        return view('footer');
+//    }
 }
