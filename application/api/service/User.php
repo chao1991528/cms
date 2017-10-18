@@ -24,7 +24,10 @@ class User extends Model {
             session('user.name', $user['username']);
             session('user.id', $user['id']);
             session('user.real', $user['realname']);
+            define('UID', $user['id']);
             return 200;
+        } else {
+            define('UID', 0);
         }
         return 400;
     }

@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 100113
 File Encoding         : 65001
 
-Date: 2017-10-17 18:39:02
+Date: 2017-10-18 18:44:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for z_project
+-- Table structure for z_product
 -- ----------------------------
-DROP TABLE IF EXISTS `z_project`;
-CREATE TABLE `z_project` (
+DROP TABLE IF EXISTS `z_product`;
+CREATE TABLE `z_product` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '' COMMENT '产品名字',
   `logo` varchar(255) NOT NULL DEFAULT '' COMMENT '产品图片',
@@ -41,10 +41,39 @@ CREATE TABLE `z_project` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of z_project
+-- Records of z_product
 -- ----------------------------
-INSERT INTO `z_project` VALUES ('1', '毫升', '', '0', '0', '地方', 'zhihu', '0000-00-00', '阿发苟富贵', '2', '1', '0', '1', null, '1505373725', '1505376126');
-INSERT INTO `z_project` VALUES ('2', '毫升', '', '0', '0', '地方', 'zhihu2', '0000-00-00', '阿发苟富贵', '2', '1', '0', '1', null, '1505373725', '1505376126');
+INSERT INTO `z_product` VALUES ('1', '产品1', '', '1', 'fad', '地方', 'zhihu', '0000-00-00', '阿发苟富贵', '2', '1', '0', '1', null, '1505373725', '1505376126');
+INSERT INTO `z_product` VALUES ('2', '产品2', '', '2', '0', '地方', 'zhihu2', '0000-00-00', '阿发苟富贵', '2', '1', '0', '1', null, '1505373725', '1505376126');
+
+-- ----------------------------
+-- Table structure for z_product_type
+-- ----------------------------
+DROP TABLE IF EXISTS `z_product_type`;
+CREATE TABLE `z_product_type` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '分类名字',
+  `create_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `logo` varchar(200) NOT NULL DEFAULT '' COMMENT '分类图标',
+  `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='产品类型表';
+
+-- ----------------------------
+-- Records of z_product_type
+-- ----------------------------
+INSERT INTO `z_product_type` VALUES ('1', '产品分类1', '2017-10-18 00:00:00', '/logo', '0');
+INSERT INTO `z_product_type` VALUES ('2', '产品分类2', '2017-11-21 22:59:59', '/logo2', '1');
+INSERT INTO `z_product_type` VALUES ('5', '产品分类1', '2017-10-18 00:00:00', '/logo', '0');
+INSERT INTO `z_product_type` VALUES ('6', '产品分类2', '2017-11-21 22:59:59', '/logo2', '1');
+INSERT INTO `z_product_type` VALUES ('7', '产品分类1', '2017-10-18 00:00:00', '/logo', '0');
+INSERT INTO `z_product_type` VALUES ('8', '产品分类2', '2017-11-21 22:59:59', '/logo2', '1');
+INSERT INTO `z_product_type` VALUES ('9', '产品分类1', '2017-10-18 00:00:00', '/logo', '0');
+INSERT INTO `z_product_type` VALUES ('10', '产品分类2', '2017-11-21 22:59:59', '/logo2', '1');
+INSERT INTO `z_product_type` VALUES ('11', '产品分类1', '2017-10-18 00:00:00', '/logo', '0');
+INSERT INTO `z_product_type` VALUES ('12', '产品分类2', '2017-11-21 22:59:59', '/logo2', '1');
+INSERT INTO `z_product_type` VALUES ('13', '产品分类2', '2017-11-21 22:59:59', '/logo2', '1');
+INSERT INTO `z_product_type` VALUES ('14', '产品分类1', '2017-10-18 00:00:00', '/logo', '0');
 
 -- ----------------------------
 -- Table structure for z_user
@@ -67,7 +96,7 @@ CREATE TABLE `z_user` (
 -- ----------------------------
 -- Records of z_user
 -- ----------------------------
-INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508209998');
+INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508296723');
 INSERT INTO `z_user` VALUES ('2', 'fafffff', '7c222fb2927d828af22f592134e8932480637c0d', 'sg', 'gs@qq.com', '3', '1', null, null);
 INSERT INTO `z_user` VALUES ('3', 'rehg', '20eabe5d64b0e216796e834f52d61fd0b70332fc', '1234556', '544@qq.com', '3', '1', null, null);
 SET FOREIGN_KEY_CHECKS=1;

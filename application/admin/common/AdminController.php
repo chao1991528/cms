@@ -12,7 +12,7 @@ class AdminController extends Controller {
 
     protected function loginNeed() {
         if (!is_logined()) {
-            $this->redirect('/login.html');
+            $this->redirect('/index.html');
         }
     }
 

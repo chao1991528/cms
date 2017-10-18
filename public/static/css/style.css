@@ -135,7 +135,7 @@ h2{font-weight:normal;}
 .tools{clear:both; height:35px; margin-bottom:20px;}
 .toolbar{float:left;}
 .toolbar li{background:url(../images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-right:18px;border-radius: 3px; behavior:url(js/pie.htc); cursor:pointer;}
-.toolbar li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
+.toolbar li span{float:left; margin-left:10px; margin-right:5px;}
 .toolbar1{float:right;}
 .toolbar1 li{background:url(../images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-left:5px;border-radius: 3px; behavior:url(js/pie.htc);}
 .toolbar1 li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}

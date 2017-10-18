@@ -5,7 +5,7 @@ namespace app\admin\controller;
 use app\admin\common\AdminController;
 use think\Db;
 
-class Project extends AdminController {
+class Product extends AdminController {
 
     protected $beforeActionList = [
         'loginNeed'
@@ -14,14 +14,11 @@ class Project extends AdminController {
     //项目列表页
     public function plist() {
         $setView = [
-            'css' => ['style']
+            'css' => ['style', 'jquery.dataTables'],
+            'js'  => ['jquery.dataTables.min']
         ];
         $this->set_view($setView);
-        
-        $projects = Db::name('project')->select();
-        return view('plist', [
-            'projects'  => $projects
-        ]);
+        return view('plist');        
     }
 
 }

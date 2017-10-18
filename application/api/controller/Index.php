@@ -4,7 +4,6 @@ namespace app\api\controller;
 
 use app\api\common\ApiController;
 use think\captcha\Captcha;
-use think\Db;
 
 class Index extends ApiController {
 

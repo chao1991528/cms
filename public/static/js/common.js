@@ -52,4 +52,55 @@ $(function () {
             $(this).next('.menuson').slideDown();
         }
     });
+    //数据列表页全选和全不选
+    $('.checkall').click(function () {
+        if ($(this).is(':checked')) {
+            $('body tr td input[type="checkbox"]').prop("checked", true);
+        } else {
+            $('body tr td input[type="checkbox"]').prop("checked", false);
+        }
+    });
+    //如果有一行取消/选中，则取消/全选
+    $('table').on('click', 'tbody tr input[type="checkbox"]', function () {
+        if ($(this).is(':checked')) {
+            var checkboxNum = $('body tr td input[type="checkbox"]').length;
+            var checkedNum = 0;
+            $('body tr td input[type="checkbox"]').each(function () {
+                if ($(this).is(':checked')) {
+                    checkedNum++;
+                }
+            });
+            if (checkboxNum === checkedNum) {
+                $('.checkall').prop('checked', true);
+            }
+
+        } else {
+            $('.checkall').prop('checked', false);
+        }
+    });
+
+    //数据列表页删除按钮
+    $('.toolbar').children('li').eq(1).click(function () {
+        var ids = '';
+        $('body tr td input[type="checkbox"]').each(function () {
+            if ($(this).is(':checked')) {
+                ids += $(this).val()+',';
+            }            
+        });
+        if (ids.length > 0) {
+            ids = ids.substring(0, ids.length - 1);
+            $.post(delUrl, { ids: ids },
+                function(data){
+                    alert("Data Loaded: " + data);
+                }
+            );
+        } else {
+            layer.open({
+                title: '错误',
+                icon:5,
+                content: '没有选中删除项目！'
+            });
+        }        
+    });
+    
 });
