@@ -32,8 +32,6 @@ $(function () {
             } else {
                 $parent.addClass("open").find('.sub-menus').show();
             }
-
-
         }
     });
 
@@ -56,13 +54,16 @@ $(function () {
     $('.checkall').click(function () {
         if ($(this).is(':checked')) {
             $('body tr td input[type="checkbox"]').prop("checked", true);
+            $('body tr').addClass('selected');
         } else {
             $('body tr td input[type="checkbox"]').prop("checked", false);
+            $('body tr').removeClass('selected');
         }
     });
     //如果有一行取消/选中，则取消/全选
     $('table').on('click', 'tbody tr input[type="checkbox"]', function () {
         if ($(this).is(':checked')) {
+            $(this).parents('tr').addClass('selected');
             var checkboxNum = $('body tr td input[type="checkbox"]').length;
             var checkedNum = 0;
             $('body tr td input[type="checkbox"]').each(function () {
@@ -75,6 +76,7 @@ $(function () {
             }
 
         } else {
+            $(this).parents('tr').removeClass('selected');
             $('.checkall').prop('checked', false);
         }
     });
@@ -91,15 +93,16 @@ $(function () {
             ids = ids.substring(0, ids.length - 1);
             $.post(delUrl, { ids: ids },
                 function(data){
-                    alert("Data Loaded: " + data);
+                    if(data.code === 200){
+                        dTable.rows('.selected').remove().draw( false );
+                        layer.msg('删除产品类型成功！', {time: 1500,  icon:6});
+                    }else{
+                        layer.msg(data.message, {time: 1500,  icon:5});
+                    }
                 }
             );
         } else {
-            layer.open({
-                title: '错误',
-                icon:5,
-                content: '没有选中删除项目！'
-            });
+            layer.open({title: '错误',icon:5,content: '没有选中删除项目！'});
         }        
     });
     

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#typeList').DataTable({
+    dTable = $('#typeList').DataTable({
         "ajax": "/api/type/doTlist",
         "language": {
             url: '/api/type/localisation'
