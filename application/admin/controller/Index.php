@@ -3,12 +3,7 @@ namespace app\admin\controller;
 use app\admin\common\AdminController;
 use think\captcha\Captcha;
 class Index extends AdminController
-{
-    protected $beforeActionList = [
-//        'loginNeed'
-        'loginNeed' => ['except' => 'index,verify'],
-    ];
-    
+{    
     //登录页面
     public function index()
     {
