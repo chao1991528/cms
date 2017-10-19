@@ -34,18 +34,14 @@ class Type extends ApiController {
     
     //添加产品类型
     public function doAddProType(){
-        
-        $data = input('post.');echo 'aa';die;
-//        $time = time();
-//        $data['create_time'] = $time;
-//        $data['update_time'] = $time;
-        $result = $this->validate($data,'ProductType');
-        echo 'f00';die;
+        //获取参数并验证
+        $data = input('post.');
+        $result = $this->validate($data,'ProductType.add');
         if(true !== $result){
             return $this->resMes('444', $result);
         }
-        echo 'ff';die;
-        $res = db('productType')->insert($data);
+        $productType = model('ProductType');
+        $res = $productType->saveData($data);
         //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
     }
