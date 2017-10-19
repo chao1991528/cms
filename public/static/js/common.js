@@ -1,4 +1,5 @@
 $(function () {
+    var layer = layui.layer;
     $('#logout').click(function () {
         layer.confirm('确定退出登录吗？',
                 {
@@ -84,26 +85,63 @@ $(function () {
     //数据列表页删除按钮
     $('.toolbar').children('li').eq(1).click(function () {
         var ids = '';
+        var num = 0;
         $('body tr td input[type="checkbox"]').each(function () {
             if ($(this).is(':checked')) {
-                ids += $(this).val()+',';
-            }            
+                ids += $(this).val() + ',';
+                num++;
+            }
         });
         if (ids.length > 0) {
-            ids = ids.substring(0, ids.length - 1);
-            $.post(delUrl, { ids: ids },
-                function(data){
-                    if(data.code === 200){
-                        dTable.rows('.selected').remove().draw( false );
-                        layer.msg('删除产品类型成功！', {time: 1500,  icon:6});
-                    }else{
-                        layer.msg(data.message, {time: 1500,  icon:5});
+            layer.confirm('确定删除这' + num + '项吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                ids = ids.substring(0, ids.length - 1);
+                $.post(delUrl, {ids: ids},
+                    function (data) {
+                        if (data.code === 200) {
+                            dTable.rows('.selected').remove().draw(false);
+                            layer.msg('删除产品类型成功！', {time: 1500});
+                        } else {
+                            layer.msg(data.message, {time: 1500, icon: 5});
+                        }
                     }
-                }
-            );
+                );
+            });
         } else {
-            layer.open({title: '错误',icon:5,content: '没有选中删除项目！'});
-        }        
+            layer.open({title: '错误', icon: 5, content: '没有选中删除项目！'});
+        }
     });
     
+    //添加按钮点击
+    $('.toolbar').children('li').eq(0).click(function () {
+        $('#form').removeClass('hidden');
+        $('.submitBtn').val('添加');
+        layer.open({
+            type: 1,
+            area: '700px',
+            shadeClose: false,
+            content: $('#form'),
+            cancel: function (index, layero) {
+                $('#form').addClass('hidden');
+                layer.close(index);
+                return false;
+//                layer.confirm('确定离开？', {
+//                    title: false,
+//                    closeBtn: 0,
+//                    btn: ['是', '否'] //按钮
+//                }, function () {
+//                    layer.close(index);
+//                }, function(){
+//                    $('#form').addClass('hidden');
+//                });                
+            }
+        });
+    });
+    
+    //重置表单
+    $('.resetBtn').click(function(){
+        $('#form')[0].reset();
+    });
+   
 });

@@ -28,6 +28,25 @@ class Type extends ApiController {
             return $this->resMes(444, '类型下面还有产品，请先删除属于这些类型产品');
         }        
         $res = Db::name('ProductType')->where('id','in',$ids)->delete();
+        //还有日志操作undo
+        return $res?$this->resMes(200):$this->resMes(400);
+    }
+    
+    //添加产品类型
+    public function doAddProType(){
+        
+        $data = input('post.');echo 'aa';die;
+//        $time = time();
+//        $data['create_time'] = $time;
+//        $data['update_time'] = $time;
+        $result = $this->validate($data,'ProductType');
+        echo 'f00';die;
+        if(true !== $result){
+            return $this->resMes('444', $result);
+        }
+        echo 'ff';die;
+        $res = db('productType')->insert($data);
+        //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
     }
 

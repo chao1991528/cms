@@ -27,27 +27,41 @@
                         <th class="text-center">操作</th>
                     </tr>
                 </thead>
-            </table>
-
-            <div class="tip">
-                <div class="tiptop"><span>提示信息</span><a></a></div>
-                <div class="tipinfo">
-                    <span><img src="/static/images/ticon.png" /></span>
-                    <div class="tipright">
-                        <p>是否确认对信息的修改 ？</p>
-                        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-                    </div>
-                </div>
-                <div class="tipbtn">
-                    <input name="" type="button"  class="sure" value="确定" />&nbsp;
-                    <input name="" type="button"  class="cancel" value="取消" />
-                </div>
-            </div>
+            </table>            
         </div>
     </div>
-</div>    
+</div>
+<form id="form" class="hidden" action="{:url('@api/type/doAddProType')}">
+    <div class="formbody">
+        <div class="formtitle"><span>添加产品类型</span></div>
+        <ul class="forminfo">
+            <li>
+                <label>分类名称</label>
+                <input name="name" type="text" class="dfinput" placeholder="分类名称不能超过50个字符" value=""/><b></b>
+            </li>
+            <li>
+                <label>分类图标</label>
+                <input type="hidden" name="logo"/>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="typeLogo">上传图片</button>
+                    <div class="layui-upload-list" style="margin-left: 84px;">
+                        <img class="layui-upload-img" id="uploaded" style="width: 100px;">
+                        <p id="demoText"></p>
+                    </div>
+                </div> 
+            </li>
+            <!--<li><label>排序</label><cite><input name="" type="radio" value="" checked="checked" />是&nbsp;&nbsp;&nbsp;&nbsp;<input name="" type="radio" value="" />否</cite></li>-->
+            <li><label>排序</label><input name="sort" type="text" class="dfinput" value="" placeholder="数组越大越靠前,默认0"/></li>
+            <!--<li><label>文章内容</label><textarea name="" cols="" rows="" class="textinput"></textarea></li>-->
+            <li style="margin-top: 25px;margin-bottom: 40px;">
+                <input type="button" class="btn btn-primary submitBtn" value=""/>
+            </li>
+        </ul>
+    </div>
+</form>
 <!-- 右边 end -->
 <script>
     var delUrl = "{:url('@api/type/doDelProType')}";
+    var uploadUrl = "{:url('@api/index/doUpload')}";
     var dTable;
 </script>

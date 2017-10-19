@@ -48,9 +48,10 @@
     </body>
     {load href="/static/js/jquery.min.js" /}
     {load href="/static/js/cloud.js" /}
-    {load href="/static/layer/layer.js" /}
+    <script src="/static/layui/layui.all.js"></script>
     <script language="javascript">
         $(function () {
+            var layer = layui.layer;
             $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});
             $(window).resize(function () {
                 $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});

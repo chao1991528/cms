@@ -1,0 +1,22 @@
+<?php
+namespace app\api\validate;
+
+use think\Validate;
+
+class ProductType extends Validate
+{
+    protected $rule = [
+        'name'  =>  'require|max:50|unique',
+        'logo' =>  'max:50',
+        'sort' => 'number'
+    ];
+    protected $message  =   [
+        'name.require' => '分类名称必须',
+        'name.max'     => '分类名称最多不能超过50个字符',
+        'logo.max'     => 'logo图片地址最多不能超过50个字符',
+        'sort.number'   => '年龄必须是数字'   
+    ];
+    protected $scene = [
+        'add'  =>  ['name','logo'=>'require|max:50','sort']
+    ];
+}

@@ -6,7 +6,9 @@ use app\api\common\ApiController;
 use think\captcha\Captcha;
 
 class Index extends ApiController {
-
+    protected $beforeActionList = [
+//        'loginNeed' => ['except' => 'doLogin']
+    ];
     //登录页面
     public function doLogin() {
         $username = input('post.username');
@@ -30,6 +32,22 @@ class Index extends ApiController {
     public function doLogout(){
         session(null);
         return $this->resMes(200);
+    }
+    
+    //单个文件上传处理
+    public function doUpload(){
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('file');
+        // 移动到框架应用根目录/public/uploads/ 目录下 ,上传文件不能超过4M
+        $info = $file->validate(['size' => 4*1024*1024, 'ext' => 'jpg,png,gif,bmp,jpeg'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+        if ($info) {
+            //配合layui上传插件，返回固定格式的数据
+            $uploadInfo =  ['src'=>$info->getSaveName()];
+            return $this->resData($uploadInfo);
+        } else {
+            // 上传失败获取错误信息
+            return $this->resMes(444, $file->getError());
+        }
     }
 
 }
