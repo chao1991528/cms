@@ -11,12 +11,23 @@ class User extends AdminController {
         'loginNeed'
     ];
 
-    //用户列表页
-    public function ulist() {
-        $users = Db::name('user')->select();
-        return view('list', [
-            'users'  => $users
-        ]);
+    //用户修改页面
+    public function index() {
+        $setView = [
+            'css' => ['style'],
+            'js' => ['uindex']
+        ];
+        $this->set_view($setView);
+        $user = db('user')->where('id', 1)->find();
+        return view('index', ['user' => $user]);
     }
+
+    //用户列表页
+//    public function ulist() {
+//        $users = Db::name('user')->select();
+//        return view('list', [
+//            'users'  => $users
+//        ]);
+//    }
 
 }

@@ -29,13 +29,8 @@ class Appointment extends ApiController {
     public function doDelAppointment(){
         $ids = input('post.ids');
         if(!$ids){
-            $this->resMes(300);
-        }
-        //如果该类型下还有产品，则不能删除
-        $productNum = db('Product')->where('type','in',$ids)->count();
-        if($productNum>0){
-            return $this->resMes(444, '类型下面还有产品，请先删除属于这些类型产品');
-        }        
+            return $this->resMes(300);
+        }      
         $res = db('appointment')->where('id','in',$ids)->delete();
         //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
@@ -57,18 +52,24 @@ class Appointment extends ApiController {
     
     //编辑产品类型
     public function doEditAppointment(){
-        //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'appointment');
-        if(true !== $result){
-            return $this->resMes('444', $result);
+        if (!in_array($data['status'], [0, 1, 2])) {
+            return $this->resMes(300); 
         }
-        if(empty($data['logo'])){
-            unset($data['logo']);
-        }
-        $productType = model('appointment');
-        $res = $productType->saveData($data);
+        $res = model('appointment')->saveData($data);
         return $res?$this->resMes(200):$this->resMes(400);
+        //获取参数并验证
+//        $data = input('post.');
+//        $result = $this->validate($data,'appointment');
+//        if(true !== $result){
+//            return $this->resMes('444', $result);
+//        }
+//        if(empty($data['logo'])){
+//            unset($data['logo']);
+//        }
+//        $productType = model('appointment');
+//        $res = $productType->saveData($data);
+//        return $res?$this->resMes(200):$this->resMes(400);
     }
 
     //根据id查看产品类型信息

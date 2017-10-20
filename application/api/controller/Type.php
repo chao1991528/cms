@@ -19,7 +19,7 @@ class Type extends ApiController {
     public function doDelProType(){
         $ids = input('post.ids');
         if(!$ids){
-            $this->resMes(300);
+            return $this->resMes(300); 
         }
         //如果该类型下还有产品，则不能删除
         $productNum = db('Product')->where('type','in',$ids)->count();

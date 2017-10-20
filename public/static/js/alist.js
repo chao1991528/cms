@@ -45,67 +45,24 @@ $(document).ready(function () {
         dTable.ajax.reload( null, false ); // 刷新表格数据，分页信息不会重置
     }, 30000 );
     
-    //普通图片上传
-    var uploadInst = upload.render({
-        elem: '#typeLogo',
-        url: uploadUrl,
-        data:{type:'proTyeLogo'},//设置上传到的文件夹目录为proTyeLogo
-        size: 4*1024,
-        before: function (obj) {
-            //预读本地文件示例，不支持ie8
-            obj.preview(function (index, file, result) {
-                $('#uploaded').attr('src', result); //图片链接（base64）
-            });
-        }, 
-        done: function (res) {
-            //如果上传失败
-            if (res.code != 200) {
-                return layer.msg('上传失败',{time: 1500});
-            }
-            //上传成功
-            $(".forminfo input[name='logo']").val(res.data.src);
-        }, 
-        error: function () {
-            //演示失败状态，并实现重传
-            var demoText = $('#demoText');
-            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-            demoText.find('.demo-reload').on('click', function () {
-                uploadInst.upload();
-            });
-        }
-    });
-    
     //添加页面点击添加按钮
     $('.submitBtn').click(function(){
         var isEdit = $(".forminfo input[name='id']").val().length;
-        var name = $.trim($(".forminfo input[name='name']").val());
-        var logo = $(".forminfo input[name='logo']").val();
-        if (name.length == 0 ) {
-            layer.msg('分类名称必填', {time: 1500});
-            return;
-        }
-        var url;
         var message;
         if(isEdit){
             url = editUrl;
-            message = '修改产品类型成功！';
+            message = '修改预约成功！';
         }else{
-            if ( logo.length == 0 ) {
-                layer.msg('没有上传分类图片', {time: 1500});
-                return;
-            }
             url = addUrl;
-            message = '添加产品类型成功！';            
+            message = '添加预约成功！';            
         }
         var url = isEdit?editUrl:addUrl;
-        var successMes = 
         $.post(url, $('#form').serialize(),function (data) {            
             if (data.code === 200) {
                 layer.close(layer.index);
                 $('#form').addClass('hidden');
                 layer.msg(message, {time: 2000});
                 isEdit?dTable.ajax.reload(null,false) :dTable.ajax.reload();                                             
-                $('#uploaded').removeAttr('src');
                 $('#form')[0].reset();
             } else {
                 layer.msg(data.message, {time: 1500});
@@ -128,9 +85,9 @@ $(document).ready(function () {
                 $(".forminfo input[name='id']").val(id);
                 $.post(viewUrl, {id:id},function (data) {            
                     if (data.code === 200) { 
-                        $(".forminfo input[name='name']").val(data.data['name']);
-                        $(".forminfo input[name='sort']").val(data.data['sort']);
-                        $('#uploaded').attr('src', data.data['logo']);
+                        $("input:radio[name='status']").each(function (){
+                            $(this).val()==data.data.status?$(this).attr("checked","checked"):null;
+                        });
                     } else {
                         layer.msg(data.message, {time: 1500});
                     }

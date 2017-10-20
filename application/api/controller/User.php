@@ -4,19 +4,19 @@ namespace app\api\controller;
 
 use app\api\common\ApiController;
 
-class Xilie extends ApiController {
+class User extends ApiController {
 //    protected $beforeActionList = [
 //        'loginNeed'
 //    ];
 
-    //获取产品系列列表
-    public function doXlist() {
-        $data = db('Xilie')->order('sort desc')->select();
+    //获取管理员列表
+    public function doUlist() {
+        $data = db('User')->order('sort desc')->select();
         return $this->resData($data);
     }
     
-    //删除产品系列
-    public function doDelXilie(){
+    //删除管理员
+    public function doDelUser(){
         $ids = input('post.ids');
         if(!$ids){
             return $this->resMes(300); 
@@ -26,48 +26,60 @@ class Xilie extends ApiController {
         if($productNum>0){
             return $this->resMes(444, '系列下面还有产品，请先删除属于这些系列产品');
         }        
-        $res = db('Xilie')->where('id','in',$ids)->delete();
+        $res = db('User')->where('id','in',$ids)->delete();
         //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
     }
     
-    //添加产品系列
-    public function doAddXilie(){
+    //添加管理员
+    public function doAddUser(){
         //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'Xilie.add');
+        $result = $this->validate($data,'User.add');
         if(true !== $result){
             return $this->resMes('444', $result);
         }
-        $productType = model('Xilie');
+        $productType = model('User');
         $res = $productType->saveData($data);
         //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
     }
     
-    //编辑产品系列
-    public function doEditXilie(){
+    //编辑管理员
+    public function doEditUser(){
         //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'Xilie');
+        $result = $this->validate($data,'User');
         if(true !== $result){
             return $this->resMes('444', $result);
         }
         if(empty($data['logo'])){
             unset($data['logo']);
         }
-        $productType = model('Xilie');
+        $productType = model('User');
         $res = $productType->saveData($data);
         return $res?$this->resMes(200):$this->resMes(400);
     }
 
-    //根据id查看产品系列信息
-    public function viewXilie(){
+    //根据id查看管理员信息
+    public function viewUser(){
         $id = input('post.id');
         if(!$id){
             return $this->resMes(300);
         }
         $productType = db('xilie')->where('id', $id)->find();
         return $this->resData($productType);
+    }
+    
+    //修改管理员信息
+    public function doSaveUser() {
+        $data = input('post.');
+        $data['id'] = 1;
+        $result = $this->validate($data, 'User.edit');
+        if (true !== $result) {
+            return $this->resMes('444', $result);
+        }
+        $res = model('user')->saveData($data);
+        return $res ? $this->resMes(200) : $this->resMes(400);
     }
 }

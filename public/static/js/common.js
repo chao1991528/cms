@@ -101,7 +101,7 @@ $(function () {
                     function (data) {
                         if (data.code === 200) {
                             dTable.rows('.selected').remove().draw(false);
-                            layer.msg('删除产品类型成功！', {time: 1500});
+                            layer.msg('删除成功！', {time: 1500});
                         } else {
                             layer.msg(data.message, {time: 1500, icon: 5});
                         }

@@ -11,7 +11,7 @@
         <div class="rightinfo">    
             <div class="tools">			    
                 <ul class="toolbar">
-                    <!--<li class="click"><span><img src="/static/images/t01.png" /></span>添加</li>-->
+                    <li class="click hidden"><span><img src="/static/images/t01.png" /></span>添加</li>
                     <li><span><img src="/static/images/t03.png" /></span>删除</li> 
                 </ul>	
             </div>	
@@ -44,9 +44,9 @@
             <li>
                 <label>是否审核</label>
                 <cite>
-                    <input name="" type="radio" value="0" checked="checked" />预约中&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="" type="radio" value="1" />已使用&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="" type="radio" value="2" />已过期&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="status" type="radio" value="0" />预约中&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="status" type="radio" value="1" />已使用&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="status" type="radio" value="2" />已过期&nbsp;&nbsp;&nbsp;&nbsp;
                 </cite>
             </li>
             
@@ -58,10 +58,8 @@
 </form>
 <!-- 右边 end -->
 <script>
-    var delUrl = "{:url('@api/type/doDelAppointment')}";
-    var uploadUrl = "{:url('@api/index/doUpload')}";
-    var addUrl = "{:url('@api/type/doAddAppointment')}";
-    var editUrl = "{:url('@api/type/doEditAppointment')}";
-    var viewUrl = "{:url('@api/type/viewAppointment')}";
+    var delUrl = "{:url('@api/appointment/doDelAppointment')}";
+    var editUrl = "{:url('@api/appointment/doEditAppointment')}";
+    var viewUrl = "{:url('@api/appointment/viewAppointment')}";
     var dTable;
 </script>
