@@ -4,70 +4,70 @@ namespace app\api\controller;
 
 use app\api\common\ApiController;
 
-class Type extends ApiController {
+class Xilie extends ApiController {
 //    protected $beforeActionList = [
 //        'loginNeed'
 //    ];
 
-    //获取产品类型列表
-    public function doTlist() {
-        $data = db('ProductType')->order('sort desc')->select();
+    //获取产品系列列表
+    public function doXlist() {
+        $data = db('Xilie')->order('sort desc')->select();
         return $this->resData($data);
     }
     
-    //删除产品类型
-    public function doDelProType(){
+    //删除产品系列
+    public function doDelXilie(){
         $ids = input('post.ids');
         if(!$ids){
             $this->resMes(300);
         }
-        //如果该类型下还有产品，则不能删除
+        //如果该系列下还有产品，则不能删除
         $productNum = db('Product')->where('type','in',$ids)->count();
         if($productNum>0){
-            return $this->resMes(444, '类型下面还有产品，请先删除属于这些类型产品');
+            return $this->resMes(444, '系列下面还有产品，请先删除属于这些系列产品');
         }        
-        $res = db('ProductType')->where('id','in',$ids)->delete();
+        $res = db('Xilie')->where('id','in',$ids)->delete();
         //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
     }
     
-    //添加产品类型
-    public function doAddProType(){
+    //添加产品系列
+    public function doAddXilie(){
         //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'ProductType.add');
+        $result = $this->validate($data,'Xilie.add');
         if(true !== $result){
             return $this->resMes('444', $result);
         }
-        $productType = model('ProductType');
+        $productType = model('Xilie');
         $res = $productType->saveData($data);
         //还有日志操作undo
         return $res?$this->resMes(200):$this->resMes(400);
     }
     
-    //编辑产品类型
-    public function doEditProType(){
+    //编辑产品系列
+    public function doEditXilie(){
         //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'ProductType');
+        $result = $this->validate($data,'Xilie');
         if(true !== $result){
             return $this->resMes('444', $result);
         }
         if(empty($data['logo'])){
             unset($data['logo']);
         }
-        $productType = model('ProductType');
+        $productType = model('Xilie');
         $res = $productType->saveData($data);
         return $res?$this->resMes(200):$this->resMes(400);
     }
 
-    //根据id查看产品类型信息
-    public function viewProType(){
+    //根据id查看产品系列信息
+    public function viewXilie(){
         $id = input('post.id');
         if(!$id){
             return $this->resMes(300);
         }
-        $productType = db('productType')->where('id', $id)->find();
+        $productType = db('xilie')->where('id', $id)->find();
         return $this->resData($productType);
     }
 }

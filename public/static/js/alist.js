@@ -1,9 +1,9 @@
 $(document).ready(function () {
     var upload = layui.upload;
     dTable = $('#typeList').DataTable({
-        "ajax": "/api/type/doTlist",
+        "ajax": "/api/appointment/doAlist",
         "language": {
-            url: '/api/type/localisation'
+            url: '/api/appointment/localisation'
         },
         "order": [[ 1, "desc" ]],
         "columns": [
@@ -17,22 +17,19 @@ $(document).ready(function () {
             },
             {"data": "id", "sClass": "text-center"},
             {"data": "name", "sClass": "text-center"},
-            {
-                "data": "logo", 
-                "sClass": "text-center",
-                "render": function (data, type, full, meta) {
-                    return '<img style="width:100px;"  src="' + data + '" />';
-                }, 
-                "bSortable": false
-            },
-            {"data": "sort", "sClass": "text-center"},
-            {"data": "create_time", "sClass": "text-center"}
+            {"data": "phone", "sClass": "text-center"},
+            {"data": "product_name", "sClass": "text-center"},
+            {"data": "store_name", "sClass": "text-center"},
+            {"data": "appoint_full_time", "sClass": "text-center"},
+            {"data": "person_num", "sClass": "text-center"},
+            {"data": "remark", "sClass": "text-center"},
+            {"data": "status", "sClass": "text-center"},
+            {"data": "member_code", "sClass": "text-center"}
         ],
         "aoColumnDefs": [
-            { "sWidth": "5%", "aTargets": [0] },
-            { "sWidth": "10%", "aTargets": [1] },
+            { "sWidth": "3%", "aTargets": [0] },
             {  
-                "targets": 6,  
+                "targets": 11,
                 "searchable": false,
                 "sClass": "text-center",               
                 "sWidth": '10%',

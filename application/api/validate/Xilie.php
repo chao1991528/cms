@@ -3,7 +3,7 @@ namespace app\api\validate;
 
 use think\Validate;
 
-class ProductType extends Validate
+class Xilie extends Validate
 {
     protected $rule = [
         'name'  =>  'require|max:50',

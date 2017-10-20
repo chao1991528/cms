@@ -46,30 +46,16 @@ class Index extends AdminController
     }
     
     /**
-     * 左侧菜单栏
+     * 品牌理念
      */
-    public function left() {
-        return view('left');
+    public function concept() {
+        $setView = [
+            'css' => ['style'],
+            'js'  => ['concept']
+        ];
+        $this->set_view($setView);
+        $content = db('concept')->where('id', 1)->value('content');
+        return view('concept',['content'=>$content]);
     }
     
-    /**
-     * 登录后第一个页面
-     */
-    public function first(){
-        return view('first');
-    }
-    
-//    /**
-//     * 登录后首页头部页面
-//     */
-//    public function top(){
-//        return view('top');
-//    }
-//    
-//     /**
-//     * 登录后首页尾部页面
-//     */
-//    public function footer(){
-//        return view('footer');
-//    }
 }

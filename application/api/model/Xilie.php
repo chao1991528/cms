@@ -6,7 +6,7 @@ use think\Model;
 /**
  * 产品类型模型
  */
-class ProductType extends Model
+class Xilie extends Model
 {
     protected $autoWriteTimestamp = 'datetime';
     

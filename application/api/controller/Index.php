@@ -35,19 +35,33 @@ class Index extends ApiController {
     }
     
     //单个文件上传处理
-    public function doUpload(){
+    public function doUpload() {
+        $type = input('post.type');
+        if(!$type){
+            return $this->resMes(444, '上传目录必须设置');
+        }
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('file');
         // 移动到框架应用根目录/public/uploads/ 目录下 ,上传文件不能超过4M
-        $info = $file->validate(['size' => 4*1024*1024, 'ext' => 'jpg,png,gif,bmp,jpeg'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+        $info = $file->validate(['size' => 4 * 1024 * 1024, 'ext' => 'jpg,png,gif,bmp,jpeg'])->move(ROOT_PATH . 'public' . DS . 'uploads' . DS . $type);
         if ($info) {
             //配合layui上传插件，返回固定格式的数据
-            $uploadInfo =  ['src'=>$info->getSaveName()];
+            $uploadInfo = ['src' => DS . 'uploads' . DS . $type . DS . $info->getSaveName()];
             return $this->resData($uploadInfo);
         } else {
             // 上传失败获取错误信息
             return $this->resMes(444, $file->getError());
         }
+    }
+    
+    //修改品牌理念
+    public function doSaveConcept() {
+        $content = input('post.content');
+        if (!trim($content)) {
+            return $this->resMes(300);
+        }
+        $res = db('concept')->where('id', 1)->update(['content' => $content]);
+        return $res !== false ? $this->resMes(200) : $this->resMes(400);
     }
 
 }

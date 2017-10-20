@@ -3,7 +3,10 @@ namespace app\api\validate;
 
 use think\Validate;
 
-class ProductType extends Validate
+/**
+ * 预约验证器
+ */
+class Appointment extends Validate
 {
     protected $rule = [
         'name'  =>  'require|max:50',

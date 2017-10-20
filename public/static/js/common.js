@@ -117,6 +117,8 @@ $(function () {
     $('.toolbar').children('li').eq(0).click(function () {
         $('#form').removeClass('hidden');
         $('.submitBtn').val('添加');
+        $('.formtitle span').eq(0).html('添加');
+        $(".forminfo input[name='id']").val('');
         layer.open({
             type: 1,
             area: '700px',
@@ -125,20 +127,11 @@ $(function () {
             cancel: function (index, layero) {
                 $('#form').addClass('hidden');
                 layer.close(index);
-                return false;
-//                layer.confirm('确定离开？', {
-//                    title: false,
-//                    closeBtn: 0,
-//                    btn: ['是', '否'] //按钮
-//                }, function () {
-//                    layer.close(index);
-//                }, function(){
-//                    $('#form').addClass('hidden');
-//                });                
+                return false;               
             }
         });
     });
-    
+        
     //重置表单
     $('.resetBtn').click(function(){
         $('#form')[0].reset();

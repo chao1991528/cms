@@ -31,10 +31,11 @@
         </div>
     </div>
 </div>
-<form id="form" class="hidden" action="{:url('@api/type/doAddProType')}">
-    <div class="formbody">
-        <div class="formtitle"><span>添加产品类型</span></div>
+<form id="form" class="hidden">
+    <div class="formbody">       
+        <div class="formtitle"><b><span></span><span>产品类型</span></b></div>
         <ul class="forminfo">
+            <input type="hidden" name="id"/>
             <li>
                 <label>分类名称</label>
                 <input name="name" type="text" class="dfinput" placeholder="分类名称不能超过50个字符" value=""/><b></b>
@@ -63,5 +64,8 @@
 <script>
     var delUrl = "{:url('@api/type/doDelProType')}";
     var uploadUrl = "{:url('@api/index/doUpload')}";
+    var addUrl = "{:url('@api/type/doAddProType')}";
+    var editUrl = "{:url('@api/type/doEditProType')}";
+    var viewUrl = "{:url('@api/type/viewProType')}";
     var dTable;
 </script>

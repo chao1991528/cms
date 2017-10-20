@@ -1,9 +1,9 @@
 $(document).ready(function () {
     var upload = layui.upload;
     dTable = $('#typeList').DataTable({
-        "ajax": "/api/type/doTlist",
+        "ajax": "/api/Xilie/doXlist",
         "language": {
-            url: '/api/type/localisation'
+            url: '/api/Xilie/localisation'
         },
         "order": [[ 1, "desc" ]],
         "columns": [
@@ -52,7 +52,7 @@ $(document).ready(function () {
     var uploadInst = upload.render({
         elem: '#typeLogo',
         url: uploadUrl,
-        data:{type:'proTyeLogo'},//设置上传到的文件夹目录为proTyeLogo
+        data:{type:'xilieLogo'},//设置上传到的文件夹目录为proTyeLogo
         size: 4*1024,
         before: function (obj) {
             //预读本地文件示例，不支持ie8
@@ -84,21 +84,21 @@ $(document).ready(function () {
         var name = $.trim($(".forminfo input[name='name']").val());
         var logo = $(".forminfo input[name='logo']").val();
         if (name.length == 0 ) {
-            layer.msg('分类名称必填', {time: 1500});
+            layer.msg('系列名称必填', {time: 1500});
             return;
         }
         var url;
         var message;
         if(isEdit){
             url = editUrl;
-            message = '修改产品类型成功！';
+            message = '修改产品系列成功！';
         }else{
             if ( logo.length == 0 ) {
-                layer.msg('没有上传分类图片', {time: 1500});
+                layer.msg('没有上传系列图片', {time: 1500});
                 return;
             }
             url = addUrl;
-            message = '添加产品类型成功！';            
+            message = '添加产品系列成功！';            
         }
         var url = isEdit?editUrl:addUrl;
         var successMes = 
