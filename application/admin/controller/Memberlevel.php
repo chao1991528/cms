@@ -3,22 +3,24 @@
 namespace app\admin\controller;
 
 use app\admin\common\AdminController;
-use think\Db;
 
-class Product extends AdminController {
+/**
+ * 会员等级类
+ */
+class Memberlevel extends AdminController {
 
     protected $beforeActionList = [
         'loginNeed'
     ];
 
-    //项目列表页
-    public function plist() {
+    //会员等级列表页
+    public function mlist() {
         $setView = [
             'css' => ['style', 'bootstrap.min', 'dataTables.bootstrap'],
-            'js'  => ['jquery.dataTables.min','dataTables.bootstrap','plist']
+            'js'  => ['jquery.dataTables.min','dataTables.bootstrap','mlist']
         ];
         $this->set_view($setView);
-        return view('plist');        
+        return view('mlist');        
     }
 
 }

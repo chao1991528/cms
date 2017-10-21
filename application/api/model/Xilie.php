@@ -10,6 +10,10 @@ class Xilie extends Model
 {
     protected $autoWriteTimestamp = 'datetime';
     
+    public function Product() {
+        return $this->belongsToMany('Product',  'product_xilie');
+    }
+    
     //添加产品类型
     public function saveData($data){
         $this->data = $data;

@@ -100,14 +100,13 @@ $(document).ready(function () {
             url = addUrl;
             message = '添加产品类型成功！';            
         }
-        var url = isEdit?editUrl:addUrl;
-        var successMes = 
-        $.post(url, $('#form').serialize(),function (data) {            
+        var url = isEdit ? editUrl : addUrl;
+        $.post(url, $('#form').serialize(), function (data) {
             if (data.code === 200) {
                 layer.close(layer.index);
                 $('#form').addClass('hidden');
                 layer.msg(message, {time: 2000});
-                isEdit?dTable.ajax.reload(null,false) :dTable.ajax.reload();                                             
+                isEdit ? dTable.ajax.reload(null, false) : dTable.ajax.reload();
                 $('#uploaded').removeAttr('src');
                 $('#form')[0].reset();
             } else {

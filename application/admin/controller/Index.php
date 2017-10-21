@@ -58,4 +58,17 @@ class Index extends AdminController
         return view('concept',['content'=>$content]);
     }
     
+    /**
+     * 首页背景图
+     */
+    public function bgImage() {
+        $setView = [
+            'css' => ['style'],
+            'js'  => ['index_bg']
+        ];
+        $this->set_view($setView);
+        $img = db('bgImg')->where('id', 1)->value('bg_image');
+        return view('bgImage',['img'=>$img]);
+    }
+    
 }
