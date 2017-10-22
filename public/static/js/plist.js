@@ -51,11 +51,15 @@ $(document).ready(function () {
         dTable.ajax.reload( null, false ); // 刷新表格数据，分页信息不会重置
     }, 30000 );
     
+    $(".select2").uedSelect({
+            width : 167
+    });
+    
     //普通图片上传
     var uploadInst = upload.render({
-        elem: '#typeLogo',
+        elem: '#productLogo',
         url: uploadUrl,
-        data:{type:'xilieLogo'},//设置上传到的文件夹目录为proTyeLogo
+        data:{type:'productLogo'},//设置上传到的文件夹目录为proTyeLogo
         size: 4*1024,
         before: function (obj) {
             //预读本地文件示例，不支持ie8
@@ -84,24 +88,18 @@ $(document).ready(function () {
     //添加页面点击添加按钮
     $('.submitBtn').click(function(){
         var isEdit = $(".forminfo input[name='id']").val().length;
-        var name = $.trim($(".forminfo input[name='name']").val());
-        var logo = $(".forminfo input[name='logo']").val();
-        if (name.length == 0 ) {
-            layer.msg('系列名称必填', {time: 1500});
+        var rs = form_check();
+        if(!rs){
             return;
         }
         var url;
         var message;
         if(isEdit){
             url = editUrl;
-            message = '修改产品系列成功！';
+            message = '修改产品成功！';
         }else{
-            if ( logo.length == 0 ) {
-                layer.msg('没有上传系列图片', {time: 1500});
-                return;
-            }
             url = addUrl;
-            message = '添加产品系列成功！';            
+            message = '添加产品成功！';            
         }
         var url = isEdit ? editUrl : addUrl;
         $.post(url, $('#form').serialize(), function (data) {
@@ -151,4 +149,65 @@ $(document).ready(function () {
         });
     });
     
+      //表单验证
+    function form_check(){
+        var name = $.trim($(".forminfo input[name='name']").val());
+        var logo = $.trim($(".forminfo input[name='logo']").val());
+        var type = $.trim($(".forminfo select[name='type']").val());
+        var guocheng = $.trim($(".forminfo input[name='guocheng']").val());
+        var huli_time = $.trim($(".forminfo input[name='huli_time']").val());
+        var price_once = $.trim($(".forminfo input[name='price_once']").val());
+        var price_all = $.trim($(".forminfo input[name='price_all']").val());
+        var all_need_ci = $.trim($(".forminfo input[name='all_need_ci']").val());
+        var sort = $.trim($(".forminfo input[name='sort']").val());
+        if ( name.length == 0 || name.length < 2 || name.length > 100 ) {
+            layer.msg('产品名称必填,不能少于2个字符且不能超过100个字符', {time: 1500});
+            return false;
+        }
+        if ( logo.length == 0 ) {
+            layer.msg('产品图片必须上传', {time: 1500});
+            return false;
+        }
+        if ( logo.length > 255 ) {
+            layer.msg('产品图片最多不能超过255个字符', {time: 1500});
+            return false;
+        }
+        if ( type == 0 || isNaN(type) ) {
+            layer.msg('产品类型必须', {time: 1500});
+            return false;
+        }
+        if ( $(".forminfo input[type=checkbox]:checked").length == 0 ) {
+            layer.msg('产品系列必须', {time: 1500});
+            return false;
+        }
+        if ( guocheng.length > 255 ) {
+            layer.msg('治疗过程最多不能超过255个字符', {time: 1500});
+            return false;
+        }
+        if ( huli_time.length > 20 ) {
+            layer.msg('护理时间最多不能超过20个字符', {time: 1500});
+            return false;
+        }
+        if ( price_once.length == 0 || isNaN(price_once) ) {
+            layer.msg('单次价格必填且为数字', {time: 1500});
+            return false;
+        }
+        if ( price_once.length == 0 || isNaN(price_once) ) {
+            layer.msg('单次价格必须且为数字', {time: 1500});
+            return false;
+        }
+        if ( price_all.length > 0 || isNaN(price_all) ) {
+            layer.msg('疗程价格必须为数字', {time: 1500});
+            return false;
+        }
+        if ( all_need_ci.length > 0 || isNaN(price_all) ) {
+            layer.msg('疗程价格中的次数必须为数字', {time: 1500});
+            return false;
+        }
+        if ( sort.length > 0 || isNaN(sort) ) {
+            layer.msg('排序必须为数字', {time: 1500});
+            return false;
+        }
+        return true;
+    }
 });

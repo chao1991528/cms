@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : self
-Source Server Version : 100113
-Source Host           : localhost:3306
+Source Server         : 本机
+Source Server Version : 50617
+Source Host           : 127.0.0.1:3306
 Source Database       : hzp
 
 Target Server Type    : MYSQL
-Target Server Version : 100113
+Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-10-21 19:28:35
+Date: 2017-10-22 22:07:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,6 +72,22 @@ CREATE TABLE `z_concept` (
 INSERT INTO `z_concept` VALUES ('1', '日置の日美皮肤管理引进国内外最先进的理念、技术和产品，为中国女性提供专业的皮肤管理、形体管理、健康管理的指导和服务，为顾客实现健康美丽优雅于一身的新时代女性而不懈努力。 日置の日美的服务团队均有多年的皮肤管理经验，技术娴熟、手法精湛、服务优良，是您最贴心的皮肤管理专家。 日置の日美运用世界级的专业技术和产品及世间一切美丽元素，为懂得生活、具有成熟审美的现代女性提供全方位的身心滋养，客人可以通过皮肤管理、形体管理、健康管理、特色护理等美丽方案，得到由内而外的舒缓和改善。');
 
 -- ----------------------------
+-- Table structure for z_log
+-- ----------------------------
+DROP TABLE IF EXISTS `z_log`;
+CREATE TABLE `z_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operation` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of z_log
+-- ----------------------------
+INSERT INTO `z_log` VALUES ('1', 'good');
+INSERT INTO `z_log` VALUES ('2', 'good55');
+
+-- ----------------------------
 -- Table structure for z_member_level
 -- ----------------------------
 DROP TABLE IF EXISTS `z_member_level`;
@@ -93,7 +109,7 @@ CREATE TABLE `z_member_level` (
   `zunxiang_service` varchar(200) DEFAULT '' COMMENT '尊享服务',
   `special_service` varchar(200) DEFAULT '' COMMENT '专属服务',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='会员等级表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='会员等级表';
 
 -- ----------------------------
 -- Records of z_member_level
@@ -112,11 +128,11 @@ CREATE TABLE `z_product` (
   `name` varchar(100) NOT NULL DEFAULT '' COMMENT '产品名字',
   `logo` varchar(255) NOT NULL DEFAULT '' COMMENT '产品图片',
   `type` int(11) NOT NULL DEFAULT '0' COMMENT '所属类型',
-  `yuanli` text NOT NULL COMMENT '产品原理',
+  `yuanli` text COMMENT '产品原理',
   `guocheng` varchar(255) NOT NULL DEFAULT '' COMMENT '治疗过程',
-  `pifu_problem` varchar(255) NOT NULL DEFAULT '' COMMENT '肌肤类型',
-  `huli_gongxiao` text NOT NULL COMMENT '护理功效',
-  `huli_time` varchar(1) NOT NULL DEFAULT '' COMMENT '护理时间',
+  `pifu_problem` text COMMENT '肌肤问题',
+  `huli_gongxiao` text COMMENT '护理功效',
+  `huli_time` varchar(20) NOT NULL DEFAULT '' COMMENT '护理时间',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态，1正常，2已删除',
   `price_once` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '单次价格',
   `price_all` int(4) unsigned NOT NULL DEFAULT '0' COMMENT '疗程价格',
@@ -126,13 +142,12 @@ CREATE TABLE `z_product` (
   `update_time` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `source_UNIQUE` (`guocheng`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_product
 -- ----------------------------
-INSERT INTO `z_product` VALUES ('1', '产品1', '\\uploads\\proTyeLogo\\20171020\\97d1d5e0cdab343be47d1a01b4baa04a.jpg', '1', '地方', 'zhihu', '干性皮肤', '阿发苟富贵', '2', '1', '1', '4', '5', '5', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-INSERT INTO `z_product` VALUES ('2', '产品2', '\\uploads\\proTyeLogo\\20171020\\a1955e269dce39437eb852cce82b5183.png', '2', '地方', 'zhihu2', '油性皮肤', '阿发苟富贵', '2', '1', '2', '9', '5', '6', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `z_product` VALUES ('5', 'uu22', 'yyy', '1', null, '', null, null, '', '1', '133', '0', '0', '0', '2017-10-22 21:59:57', '2017-10-22 21:59:57');
 
 -- ----------------------------
 -- Table structure for z_product_type
@@ -218,7 +233,7 @@ CREATE TABLE `z_user` (
 -- ----------------------------
 -- Records of z_user
 -- ----------------------------
-INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508550355');
+INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508664115');
 INSERT INTO `z_user` VALUES ('2', 'fafffff', '7c222fb2927d828af22f592134e8932480637c0d', 'sg', 'gs@qq.com', '3', '1', null, null);
 INSERT INTO `z_user` VALUES ('3', 'rehg', '20eabe5d64b0e216796e834f52d61fd0b70332fc', '1234556', '544@qq.com', '3', '1', null, null);
 
@@ -234,11 +249,11 @@ CREATE TABLE `z_xilie` (
   `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='产品系列表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='产品系列表';
 
 -- ----------------------------
 -- Records of z_xilie
 -- ----------------------------
 INSERT INTO `z_xilie` VALUES ('1', 'xilie 1', '\\uploads\\xilieLogo\\20171020\\50e09f776c11a84c0af45334692d1a03.jpg', '10', '2017-10-20 15:32:48', '2017-10-20 15:32:48');
 INSERT INTO `z_xilie` VALUES ('2', 'xilie 2', '\\uploads\\xilieLogo\\20171020\\50e09f776c11a84c0af45334692d1a03.jpg', '3', '2017-10-21 19:11:04', '2017-10-21 19:11:04');
-SET FOREIGN_KEY_CHECKS=1;
+INSERT INTO `z_xilie` VALUES ('4', 'xilie5', '\\uploads\\xilieLogo\\20171020\\50e09f776c11a84c0af45334692d1a03.jpg', '4', '2017-10-22 19:34:35', '2017-10-22 19:34:35');

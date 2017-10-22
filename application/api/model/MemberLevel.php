@@ -3,26 +3,27 @@
 namespace app\api\model;
 
 use think\Model;
+
 /**
  * 会员等级模型
  */
-class MemberLevel extends Model
-{
+class MemberLevel extends Model {
+
 //    protected $autoWriteTimestamp = 'datetime';
-    
     //保存管理员信息
-    public function saveData($data){
-        if(isset($data['id']) && !empty($data['id'])){
+    public function saveData($data) {
+        if (isset($data['id']) && !empty($data['id'])) {
             $rs = $this->save($data, ['id' => $data['id']]);
-            if($rs !== false){
+            if ($rs !== false) {
                 return true;
             }
-        }else{
+        } else {
             $rs = $this->data($data)->save();
-            if($rs){
+            if ($rs) {
                 return true;
             }
-        }        
+        }
         return false;
-    }    
+    }
+
 }

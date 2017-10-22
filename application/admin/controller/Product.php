@@ -15,10 +15,12 @@ class Product extends AdminController {
     public function plist() {
         $setView = [
             'css' => ['style', 'bootstrap.min', 'dataTables.bootstrap'],
-            'js'  => ['jquery.dataTables.min','dataTables.bootstrap','plist']
+            'js' => ['jquery.dataTables.min', 'dataTables.bootstrap', 'select-ui.min', 'plist']
         ];
+        $types = db('productType')->column('id,name');
+        $xilies = db('xilie')->column('id,name');
         $this->set_view($setView);
-        return view('plist');        
+        return view('plist', ['types' => $types, 'xilies'=>$xilies]);
     }
 
 }

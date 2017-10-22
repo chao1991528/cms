@@ -12,6 +12,7 @@ class Product extends ApiController {
     //获取产品列表
     public function doPlist() {
         $products = \app\api\model\Product::all(['status' => 1]);
+        $data = [];
         foreach ($products as $k => $v){
             $xilie_ids = $v->productXilie()->column('xilie_id');
             $xilie_names = db('xilie')->where('id','in',$xilie_ids)->column('name');
@@ -39,18 +40,31 @@ class Product extends ApiController {
     }
     
     //添加产品
-    public function doAddProduct(){
+    public function doAddProduct() {
         //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'Product');
-        if(true !== $result){
+        $result = $this->validate($data, 'Product');
+        if (true !== $result) {
             return $this->resMes('444', $result);
         }
-        $res = model('Product')->saveData($data);
+        $xilie_arr = $data['xilie'];
+        unset($data['xilie']);
+//        echo 'ff';die;
+        $product_id = model('Product')->saveData($data);
+        var_dump($product_id);die;
+        if(!$product_id){
+            return $this->resMes(400);
+        }
+        $productXilie = [];
+        foreach ($xilie_arr as $k => $v) {
+            $productXilie[$k]['product_id'] = $product_id;
+            $productXilie[$k]['xilie_id'] = $v;
+        }
+        $res = model('ProductXilie')->saveAll($productXilie);
         //还有日志操作undo
-        return $res?$this->resMes(200):$this->resMes(400);
+        return $res ? $this->resMes(200) : $this->resMes(400);
     }
-    
+
     //编辑产品
     public function doEditProduct(){
         //获取参数并验证
@@ -70,6 +84,8 @@ class Product extends ApiController {
             return $this->resMes(300);
         }
         $product = db('product')->where('id', $id)->find();
+        $xielie_ids = db('productXilie')->where('product_id', $id)->column('xilie_id');
+        $product['xilie_ids'] = $xielie_ids;
         return $this->resData($product);
     }
 }
