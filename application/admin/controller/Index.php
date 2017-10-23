@@ -3,12 +3,16 @@ namespace app\admin\controller;
 use app\admin\common\AdminController;
 use think\captcha\Captcha;
 class Index extends AdminController
-{    
+{
+    protected $beforeActionList = [
+        'loginNeed' => ['except' => 'index,verify'],
+    ];
+    
     //登录页面
     public function index()
     {
         if(is_logined()){
-            $this->redirect('/plist.html');
+            $this->redirect('admin/Product/plist');
         }
         return view('login');
     }

@@ -24,7 +24,7 @@ $(function () {
     //导航切换
     $(".menuson .header").click(function () {
         var $parent = $(this).parent();
-        $(".menuson>li.active").not($parent).removeClass("active open").find('.sub-menus').hide();
+        $(this).parent('li').siblings().removeClass("active open").find('.sub-menus').hide();
 
         $parent.addClass("active");
         if (!!$(this).next('.sub-menus').size()) {

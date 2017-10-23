@@ -5,9 +5,9 @@ namespace app\api\controller;
 use app\api\common\ApiController;
 
 class Type extends ApiController {
-//    protected $beforeActionList = [
-//        'loginNeed'
-//    ];
+    protected $beforeActionList = [
+        'loginNeed'
+    ];
 
     //获取产品类型列表
     public function doTlist() {

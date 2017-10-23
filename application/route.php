@@ -15,7 +15,7 @@ Route::get([
     'verify' => 'admin/Index/verify',
     'userlist' => 'admin/User/ulist',
     
-    'plist' => 'admin/Product/plist',
+    'plist' => 'admin/Product/plist'
 ]);
 
 Route::post([

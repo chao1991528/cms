@@ -7,7 +7,7 @@ use think\captcha\Captcha;
 
 class Index extends ApiController {
     protected $beforeActionList = [
-//        'loginNeed' => ['except' => 'doLogin']
+        'loginNeed' => ['except' => 'doLogin']
     ];
     //登录页面
     public function doLogin() {

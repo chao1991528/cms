@@ -5,9 +5,9 @@ namespace app\api\controller;
 use app\api\common\ApiController;
 
 class Xilie extends ApiController {
-//    protected $beforeActionList = [
-//        'loginNeed'
-//    ];
+    protected $beforeActionList = [
+        'loginNeed'
+    ];
 
     //获取产品系列列表
     public function doXlist() {

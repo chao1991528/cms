@@ -19,23 +19,6 @@ class Product extends Model {
         return $this->belongsTo('ProductType', 'type');
     }
 
-    /**
-     * 获取是否存在相关关联记录
-     * @param  object  系列
-     * @return bool
-     */
-    public function getIsChecked(Xilie &$Xilie) {
-        $product_id = (int) $this->id;
-        $xilie_id = (int) $Xilie->id;
-
-        //查询条件
-        $map = ['product_id' => $product_id, 'xilie_id' => $xilie_id];
-
-        $productXilie = ProductXilie::get($map);
-
-        return empty($productXilie) ? false : true;
-    }
-
     //添加产品
     public function saveData($data) {
         if (isset($data['id']) && !empty($data['id'])) {

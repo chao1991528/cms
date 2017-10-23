@@ -108,6 +108,7 @@ $(document).ready(function () {
                 $('#form').addClass('hidden');
                 layer.msg(message, {time: 2000});
                 isEdit ? dTable.ajax.reload(null, false) : dTable.ajax.reload();
+                $('.forminfo select[name="type"]').siblings('.uew-select-value').children('em').eq(0).html('请选择产品类型');
                 $('#uploaded').removeAttr('src');
                 $('#form')[0].reset();
             } else {
@@ -132,6 +133,25 @@ $(document).ready(function () {
                 $.post(viewUrl, {id:id},function (data) {            
                     if (data.code === 200) { 
                         $(".forminfo input[name='name']").val(data.data['name']);
+                        $(".forminfo input[name='logo']").val(data.data['logo']);
+                        var typeSelect = $(".forminfo select[name='type']");
+                        typeSelect.val(data.data['type']);
+                        typeSelect.siblings('.uew-select-value').children('em').eq(0).html(typeSelect.find("option:selected").text());
+                        $.each(data.data['xilie_ids'],function(i, val) {
+                            $.each($(".forminfo input[type=checkbox]"), function(){
+                                if(val == $(this).val()){
+                                    $(this).attr("checked", true);
+                                }
+                            });
+                        });
+                        $(".forminfo input[name='price_once']").val(data.data['price_once']);
+                        $(".forminfo input[name='price_all']").val(data.data['price_all']);
+                        $(".forminfo input[name='all_need_ci']").val(data.data['all_need_ci']);
+                        $(".forminfo input[name='huli_time']").val(data.data['huli_time']);
+                        $(".forminfo input[name='guocheng']").val(data.data['guocheng']);
+                        $(".forminfo textarea[name='yuanli']").val(data.data['yuanli']);
+                        $(".forminfo textarea[name='pifu_problem']").val(data.data['pifu_problem']);
+                        $(".forminfo textarea[name='huli_gongxiao']").val(data.data['huli_gongxiao']);
                         $(".forminfo input[name='sort']").val(data.data['sort']);
                         $('#uploaded').attr('src', data.data['logo']);
                     } else {
@@ -188,23 +208,23 @@ $(document).ready(function () {
             layer.msg('护理时间最多不能超过20个字符', {time: 1500});
             return false;
         }
-        if ( price_once.length == 0 || isNaN(price_once) ) {
+        if ( price_once.length == 0 && isNaN(price_once) ) {
             layer.msg('单次价格必填且为数字', {time: 1500});
             return false;
         }
-        if ( price_once.length == 0 || isNaN(price_once) ) {
+        if ( price_once.length == 0 && isNaN(price_once) ) {
             layer.msg('单次价格必须且为数字', {time: 1500});
             return false;
         }
-        if ( price_all.length > 0 || isNaN(price_all) ) {
+        if ( price_all.length > 0 && isNaN(price_all) ) {
             layer.msg('疗程价格必须为数字', {time: 1500});
             return false;
         }
-        if ( all_need_ci.length > 0 || isNaN(price_all) ) {
+        if ( all_need_ci.length > 0 && isNaN(price_all) ) {
             layer.msg('疗程价格中的次数必须为数字', {time: 1500});
             return false;
         }
-        if ( sort.length > 0 || isNaN(sort) ) {
+        if ( sort.length > 0 && isNaN(sort) ) {
             layer.msg('排序必须为数字', {time: 1500});
             return false;
         }

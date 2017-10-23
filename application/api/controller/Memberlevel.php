@@ -5,9 +5,9 @@ namespace app\api\controller;
 use app\api\common\ApiController;
 
 class Memberlevel extends ApiController {
-//    protected $beforeActionList = [
-//        'loginNeed'
-//    ];
+    protected $beforeActionList = [
+        'loginNeed'
+    ];
 
     //获取会员等级列表
     public function doMlist() {
