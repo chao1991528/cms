@@ -37,19 +37,18 @@ class Appointment extends ApiController {
     }
     
     //添加预约
-    public function doAddAppointment(){
+    public function doAddAppointment() {
         //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'appointment.add');
-        if(true !== $result){
+        $result = $this->validate($data, 'Appointment');
+        if (true !== $result) {
             return $this->resMes('444', $result);
         }
-        $productType = model('appointment');
-        $res = $productType->saveData($data);
-        //还有日志操作undo
-        return $res?$this->resMes(200):$this->resMes(400);
+        
+        $res = model('appointment')->saveData($data);
+        return $res ? $this->resMes(200) : $this->resMes(400);
     }
-    
+
     //编辑预约
     public function doEditAppointment() {
         $data = input('post.');

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100113
 File Encoding         : 65001
 
-Date: 2017-10-24 09:54:20
+Date: 2017-10-24 18:47:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,33 +43,20 @@ CREATE TABLE `z_appointment` (
 INSERT INTO `z_appointment` VALUES ('1', '110', '1', 'zyc', '13714432100', '1', '1', '1', '2017-10-20', '18:11:35', '分', '0', '2017-10-20 18:12:33', '2017-10-20 18:12:33');
 
 -- ----------------------------
--- Table structure for z_bg_img
+-- Table structure for z_index_setting
 -- ----------------------------
-DROP TABLE IF EXISTS `z_bg_img`;
-CREATE TABLE `z_bg_img` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `bg_image` varchar(255) NOT NULL DEFAULT '' COMMENT '首页背景图',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of z_bg_img
--- ----------------------------
-INSERT INTO `z_bg_img` VALUES ('1', '\\uploads\\indexBgImg\\20171021\\a8d3e88749da5acaf3611a2fe72781d1.jpg');
-
--- ----------------------------
--- Table structure for z_concept
--- ----------------------------
-DROP TABLE IF EXISTS `z_concept`;
-CREATE TABLE `z_concept` (
+DROP TABLE IF EXISTS `z_index_setting`;
+CREATE TABLE `z_index_setting` (
   `id` tinyint(4) NOT NULL,
-  `content` text NOT NULL COMMENT '品牌理念'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='品牌理念表';
+  `concept` text NOT NULL COMMENT '品牌理念',
+  `bg_img` varchar(255) NOT NULL DEFAULT '' COMMENT '首页背景图片',
+  `comment_url` varchar(255) NOT NULL DEFAULT '' COMMENT '首页点评链接'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='前台首页设置表';
 
 -- ----------------------------
--- Records of z_concept
+-- Records of z_index_setting
 -- ----------------------------
-INSERT INTO `z_concept` VALUES ('1', '日置の日美皮肤管理引进国内外最先进的理念、技术和产品，为中国女性提供专业的皮肤管理、形体管理、健康管理的指导和服务，为顾客实现健康美丽优雅于一身的新时代女性而不懈努力。 日置の日美的服务团队均有多年的皮肤管理经验，技术娴熟、手法精湛、服务优良，是您最贴心的皮肤管理专家。 日置の日美运用世界级的专业技术和产品及世间一切美丽元素，为懂得生活、具有成熟审美的现代女性提供全方位的身心滋养，客人可以通过皮肤管理、形体管理、健康管理、特色护理等美丽方案，得到由内而外的舒缓和改善。');
+INSERT INTO `z_index_setting` VALUES ('1', '日置の日美皮肤管理引进国内外最先进的理念、技术和产品，为中国女性提供专业的皮肤管理、形体管理、健康管理的指导和服务，为顾客实现健康美丽优雅于一身的新时代女性而不懈努力。 日置の日美的服务团队均有多年的皮肤管理经验，技术娴熟、手法精湛、服务优良，是您最贴心的皮肤管理专家。 日置の日美运用世界级的专业技术和产品及世间一切美丽元素，为懂得生活、具有成熟审美的现代女性提供全方位的身心滋养，客人可以通过皮肤管理、形体管理、健康管理、特色护理等美丽方案，得到由内而外的舒缓和改善。', '\\uploads\\indexBgImg\\20171024\\0d341d68c8026f34fd9cca4433b21a63.jpg', 'http://www.dianping.com/');
 
 -- ----------------------------
 -- Table structure for z_log
@@ -218,7 +205,7 @@ CREATE TABLE `z_user` (
 -- ----------------------------
 -- Records of z_user
 -- ----------------------------
-INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508807254');
+INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508830215');
 INSERT INTO `z_user` VALUES ('2', 'fafffff', '7c222fb2927d828af22f592134e8932480637c0d', 'sg', 'gs@qq.com', '3', '1', null, null);
 INSERT INTO `z_user` VALUES ('3', 'rehg', '20eabe5d64b0e216796e834f52d61fd0b70332fc', '1234556', '544@qq.com', '3', '1', null, null);
 

@@ -8,7 +8,7 @@ use think\Model;
  * 预约模型
  */
 class Appointment extends Model {
-
+    public static $stores = [ 1 => '门店1', 2 => '门店2'];
     protected $autoWriteTimestamp = 'datetime';
 
     public function getStatusAttr($value) {
@@ -17,7 +17,7 @@ class Appointment extends Model {
     }
 
     public function getStoreIdAttr($value) {
-        $store = [ 1 => '门店1', 2 => '门店2'];
+        $store = self::$stores;
         return $store[$value];
     }
 

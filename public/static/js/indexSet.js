@@ -1,14 +1,27 @@
 $(document).ready(function () {
     $(".submitBtn").click(function(){
-        var img = $(".forminfo input[name='bg_image']").val();
+        var url = $.trim($(".forminfo input[name='comment_url']").val());
+        if( url.length == 0 ){
+            layer.msg('点评链接不能为空！', {time: 1500});
+            return;
+        }            
+        
+        var content = $.trim($('.textinput').val());
+        if(content.length == 0){
+            layer.msg('品牌理念内容不能为空！', {time: 1500});
+            return;
+        }
+        
+        var img = $(".forminfo input[name='bg_img']").val();
         if( img.length == 0 ){
             layer.msg('未上传新的背景图', {time: 1500});
             return;
         }
-        var url = $('#bgImgForm').attr('action');
-        $.post(url, {bg_image:img},function (data) {            
+        
+        var url = $('#indexSetForm').attr('action');
+        $.post(url, $('#indexSetForm').serialize(),function (data) {            
             if (data.code === 200) {
-                layer.msg('首页背景修改成功', {time: 2000});
+                layer.msg('前台首页设置修改成功', {time: 2000});
             } else {
                 layer.msg(data.message, {time: 1500});
             }
@@ -34,7 +47,7 @@ $(document).ready(function () {
                 return layer.msg('上传失败',{time: 1500});
             }
             //上传成功
-            $(".forminfo input[name='bg_image']").val(res.data.src);
+            $(".forminfo input[name='bg_img']").val(res.data.src);
         }, 
         error: function () {
             //演示失败状态，并实现重传
@@ -45,4 +58,5 @@ $(document).ready(function () {
             });
         }
     });
+    
 });

@@ -54,23 +54,14 @@ class Index extends ApiController {
         }
     }
     
-    //修改品牌理念
-    public function doSaveConcept() {
-        $content = input('post.content');
-        if (!trim($content)) {
-            return $this->resMes(300);
+    //修改前台首页设置
+    public function doIndexSet() {
+        $data = input('post.');
+        $result = $this->validate($data,'IndexSet');
+        if(true !== $result){
+            return $this->resMes('444', $result);
         }
-        $res = db('concept')->where('id', 1)->update(['content' => $content]);
-        return $res !== false ? $this->resMes(200) : $this->resMes(400);
-    }
-    
-    //修改首页背景图片
-    public function doSaveBgImg() {
-        $bg_image = input('post.bg_image');
-        if (!trim($bg_image)) {
-            return $this->resMes(300);
-        }
-        $res = db('bgImg')->where('id', 1)->update(['bg_image' => $bg_image]);
+        $res = db('indexSetting')->where('id', 1)->update($data);
         return $res !== false ? $this->resMes(200) : $this->resMes(400);
     }
 
