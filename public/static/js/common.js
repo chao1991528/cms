@@ -39,6 +39,8 @@ $(function () {
     // 三级菜单点击
     $('.sub-menus li').click(function (e) {
         $(".sub-menus li.active").removeClass("active");
+        $(this).parents('li').addClass('open');
+        $(this).parents('li').siblings('li .open').removeClass('open');
         $(this).addClass("active");
     });
 
