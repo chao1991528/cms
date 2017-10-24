@@ -1,26 +1,44 @@
 <?php
 
-namespace app\admin\controller;
+namespace app\front\controller;
 
-use app\admin\common\FrontController;
+use app\front\common\FrontController;
 
 /**
  * 会员等级类
  */
 class Memberlevel extends FrontController {
 
-    protected $beforeActionList = [
-        'loginNeed'
-    ];
+//    protected $beforeActionList = [
+//        'loginNeed'
+//    ];
 
     //会员等级列表页
     public function mlist() {
         $setView = [
-            'css' => ['style', 'bootstrap.min', 'dataTables.bootstrap'],
-            'js'  => ['jquery.dataTables.min','dataTables.bootstrap','mlist']
+            'title' => 'VIP',
+            'css' => ['vipList']
         ];
         $this->set_view($setView);
-        return view('mlist');        
+        
+        $memberLevels = db('memberLevel')->field('id,name')->select();
+        return view('mlist', ['levels' => $memberLevels]);        
+    }
+    
+    //会员等级详情页
+    public function mdetail() {
+        $setView = [
+            'title' => 'VIP',
+            'css' => ['vip']
+        ];
+        $this->set_view($setView);
+        
+        $id = input('param.id');
+        if(!$id){
+            echo '参数有误！';die;
+        }
+        $level = db('memberLevel')->where('id', $id)->find();
+        return view('mdetail', ['level' => $level]);
     }
 
 }

@@ -42,7 +42,7 @@ class Appointment extends Validate {
     protected function checkPhone($value, $rule, $data) {
         $map = ['phone'=> $value, 'create_time' => ['>', date('Y-m-d')]];
         $rs = db('appointment')->where($map)->find();
-        return $rs ? true : '改手机号当天已经预约过了';
+        return $rs ? '该手机号当天已经预约过了': true;
     }
 
 }
