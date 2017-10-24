@@ -1,22 +1,21 @@
+getDate('#time-of-appointment', 'date');
+getDate('#specific-time', 'time');
+function getDate(id, type) {
+    /*选择预约日期*/
+    var calendar = new datePicker();
+    calendar.init({
+        'trigger': id, /*按钮选择器，用于触发弹出插件*/
+        'type': type, /*模式：date日期；datetime日期时间；time时间；ym年月；*/
+        'minDate': '1900-1-1', /*最小日期*/
+        'maxDate': '2100-12-31', /*最大日期*/
+        'onSubmit': function () {/*确认时触发事件*/
+            var theSelectData = calendar.value;
+        },
+        'onClose': function () {/*取消时触发事件*/
+        }
+    });
+}
 $(function () {
-    getDate('#time-of-appointment', 'date');
-    getDate('#specific-time', 'time');
-    getDate('#specific-time1', 'time');
-    function getDate(id, type) {
-        /*选择预约日期*/
-        var calendar = new datePicker();
-        calendar.init({
-            'trigger': id, /*按钮选择器，用于触发弹出插件*/
-            'type': type, /*模式：date日期；datetime日期时间；time时间；ym年月；*/
-            'minDate': '1900-1-1', /*最小日期*/
-            'maxDate': '2100-12-31', /*最大日期*/
-            'onSubmit': function () {/*确认时触发事件*/
-                var theSelectData = calendar.value;
-            },
-            'onClose': function () {/*取消时触发事件*/
-            }
-        });
-    }
     /*会员编号*/
     $('.member input').on('change', function () {
         if ($(this).val() == 1) {
