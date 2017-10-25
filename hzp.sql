@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100113
 File Encoding         : 65001
 
-Date: 2017-10-25 18:32:16
+Date: 2017-10-25 18:41:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,6 +124,7 @@ CREATE TABLE `z_product` (
   `price_once` int(10) NOT NULL DEFAULT '0' COMMENT '单次价格',
   `price_all` int(10) NOT NULL DEFAULT '0' COMMENT '疗程价格',
   `all_need_ci` int(10) NOT NULL DEFAULT '0' COMMENT '一个疗程需要治疗的次数',
+  `is_recommend` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否推荐，默认0不推荐，1是推荐',
   `sort` int(10) NOT NULL DEFAULT '0' COMMENT '排序',
   `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
@@ -133,16 +134,16 @@ CREATE TABLE `z_product` (
 -- ----------------------------
 -- Records of z_product
 -- ----------------------------
-INSERT INTO `z_product` VALUES ('1', 'tgs', '\\uploads\\productLogo\\20171023\\7bac53d121d276b1ef763c086067f4a6.jpg', '5', '原理。。。', '舒适', '瓷白美肌（白）：肤色暗沉、色素沉着、黑黄|驻颜抗衰（黑）：松弛下垂、干瘪老化的肌肤|免疫活肤（金）：角质薄、敏感肌、缺水性皮肤', '去皱纹，黑眼圈|皮肤水润，洁白，明星般的效果', '30分钟', '1', '34', '300', '10', '0', '2017-10-23 09:56:13', '2017-10-23 09:56:13');
-INSERT INTO `z_product` VALUES ('13', 'test_p8*', '\\uploads\\productLogo\\20171023\\60415ddbb6347a2b026f85054b3691f5.png', '21', '原理多多', '清爽', '瓷白美肌（白）：肤色暗沉、色素沉着、黑黄|驻颜抗衰（黑）：松弛下垂、干瘪老化的肌肤|免疫活肤（金）：角质薄、敏感肌、缺水性皮肤', '去皱纹，黑眼圈|皮肤水润，洁白，明星般的效果', '60分钟', '1', '158', '1200', '10', '999', '2017-10-23 12:30:54', '2017-10-25 11:29:00');
-INSERT INTO `z_product` VALUES ('17', 'test_p123', '\\uploads\\productLogo\\20171025\\ad5c973a02790933d0d9204b00fdec04.png', '5', '最先进的美容技术', '清爽', '干性皮肤', '防干燥', '40分钟', '1', '120', '1000', '10', '1', '2017-10-25 18:08:47', '2017-10-25 18:08:47');
-INSERT INTO `z_product` VALUES ('18', 'test_p_555', '\\uploads\\productLogo\\20171025\\46fa9d3b3682827211bf3517da661b28.jpg', '5', '原理。。。。。', 'good', '油性皮肤', '刚刚好的', '35min', '1', '98', '450', '5', '3', '2017-10-25 18:10:26', '2017-10-25 18:10:26');
-INSERT INTO `z_product` VALUES ('19', 'test_P951', '\\uploads\\productLogo\\20171025\\66c22af8906dc21baea233691e6ec6c6.jpg', '5', 'yuanli ma ', 'good', '所有皮肤问题', 'great', '30min', '1', '88', '400', '5', '4', '2017-10-25 18:11:41', '2017-10-25 18:11:41');
-INSERT INTO `z_product` VALUES ('20', 'test_p4423', '\\uploads\\productLogo\\20171025\\e6fb4ec739d65e870efe497544679553.jpg', '5', 'yuan li ma I know', 'very good', 'all skin', 'nice', '50min', '1', '150', '400', '3', '11', '2017-10-25 18:12:56', '2017-10-25 18:12:56');
-INSERT INTO `z_product` VALUES ('21', 'test_p4321', '\\uploads\\productLogo\\20171025\\00effbcdd124e901f918ff568b7fb012.png', '5', 'yuanli ........', 'perfect', 'skin all suit ', 'you can try it', '1h左右', '1', '200', '900', '5', '6', '2017-10-25 18:14:32', '2017-10-25 18:14:32');
-INSERT INTO `z_product` VALUES ('22', 'test_p_6666', '\\uploads\\productLogo\\20171025\\8d2b9175ef0edfd1ddd13d54c5faaedc.jpg', '5', 'you know ', 'you got it', 'all pi fu', 'great ...', '1h', '1', '250', '600', '3', '7', '2017-10-25 18:16:00', '2017-10-25 18:16:00');
-INSERT INTO `z_product` VALUES ('23', 'test_p_9527', '\\uploads\\productLogo\\20171025\\1767078fa004794b70c182ac73fd82a0.jpg', '5', 'yuan li ne', 'nice', 'wen ti ne ', 'xiaoguo ne ', '35min', '1', '120', '300', '3', '7', '2017-10-25 18:17:28', '2017-10-25 18:17:28');
-INSERT INTO `z_product` VALUES ('24', 'test_p_38887', '\\uploads\\productLogo\\20171025\\8551fabeda125b808e265dd1767f2e12.jpg', '5', 'yuan li I don\'t care', 'very nice', 'all suitable', 'you need it ', '1.5h左右', '1', '300', '1100', '4', '9', '2017-10-25 18:18:55', '2017-10-25 18:18:55');
+INSERT INTO `z_product` VALUES ('1', 'tgs', '\\uploads\\productLogo\\20171023\\7bac53d121d276b1ef763c086067f4a6.jpg', '5', '原理。。。', '舒适', '瓷白美肌（白）：肤色暗沉、色素沉着、黑黄|驻颜抗衰（黑）：松弛下垂、干瘪老化的肌肤|免疫活肤（金）：角质薄、敏感肌、缺水性皮肤', '去皱纹，黑眼圈|皮肤水润，洁白，明星般的效果', '30分钟', '1', '34', '300', '10', '0', '0', '2017-10-23 09:56:13', '2017-10-23 09:56:13');
+INSERT INTO `z_product` VALUES ('13', 'test_p8*', '\\uploads\\productLogo\\20171023\\60415ddbb6347a2b026f85054b3691f5.png', '21', '原理多多', '清爽', '瓷白美肌（白）：肤色暗沉、色素沉着、黑黄|驻颜抗衰（黑）：松弛下垂、干瘪老化的肌肤|免疫活肤（金）：角质薄、敏感肌、缺水性皮肤', '去皱纹，黑眼圈|皮肤水润，洁白，明星般的效果', '60分钟', '1', '158', '1200', '10', '0', '999', '2017-10-23 12:30:54', '2017-10-25 11:29:00');
+INSERT INTO `z_product` VALUES ('17', 'test_p123', '\\uploads\\productLogo\\20171025\\ad5c973a02790933d0d9204b00fdec04.png', '5', '最先进的美容技术', '清爽', '干性皮肤', '防干燥', '40分钟', '1', '120', '1000', '10', '0', '1', '2017-10-25 18:08:47', '2017-10-25 18:08:47');
+INSERT INTO `z_product` VALUES ('18', 'test_p_555', '\\uploads\\productLogo\\20171025\\46fa9d3b3682827211bf3517da661b28.jpg', '5', '原理。。。。。', 'good', '油性皮肤', '刚刚好的', '35min', '1', '98', '450', '5', '0', '3', '2017-10-25 18:10:26', '2017-10-25 18:10:26');
+INSERT INTO `z_product` VALUES ('19', 'test_P951', '\\uploads\\productLogo\\20171025\\66c22af8906dc21baea233691e6ec6c6.jpg', '5', 'yuanli ma ', 'good', '所有皮肤问题', 'great', '30min', '1', '88', '400', '5', '0', '4', '2017-10-25 18:11:41', '2017-10-25 18:11:41');
+INSERT INTO `z_product` VALUES ('20', 'test_p4423', '\\uploads\\productLogo\\20171025\\e6fb4ec739d65e870efe497544679553.jpg', '5', 'yuan li ma I know', 'very good', 'all skin', 'nice', '50min', '1', '150', '400', '3', '0', '11', '2017-10-25 18:12:56', '2017-10-25 18:12:56');
+INSERT INTO `z_product` VALUES ('21', 'test_p4321', '\\uploads\\productLogo\\20171025\\00effbcdd124e901f918ff568b7fb012.png', '5', 'yuanli ........', 'perfect', 'skin all suit ', 'you can try it', '1h左右', '1', '200', '900', '5', '0', '6', '2017-10-25 18:14:32', '2017-10-25 18:14:32');
+INSERT INTO `z_product` VALUES ('22', 'test_p_6666', '\\uploads\\productLogo\\20171025\\8d2b9175ef0edfd1ddd13d54c5faaedc.jpg', '5', 'you know ', 'you got it', 'all pi fu', 'great ...', '1h', '1', '250', '600', '3', '0', '7', '2017-10-25 18:16:00', '2017-10-25 18:16:00');
+INSERT INTO `z_product` VALUES ('23', 'test_p_9527', '\\uploads\\productLogo\\20171025\\1767078fa004794b70c182ac73fd82a0.jpg', '5', 'yuan li ne', 'nice', 'wen ti ne ', 'xiaoguo ne ', '35min', '1', '120', '300', '3', '0', '7', '2017-10-25 18:17:28', '2017-10-25 18:17:28');
+INSERT INTO `z_product` VALUES ('24', 'test_p_38887', '\\uploads\\productLogo\\20171025\\8551fabeda125b808e265dd1767f2e12.jpg', '5', 'yuan li I don\'t care', 'very nice', 'all suitable', 'you need it ', '1.5h左右', '1', '300', '1100', '4', '0', '9', '2017-10-25 18:18:55', '2017-10-25 18:18:55');
 
 -- ----------------------------
 -- Table structure for z_product_type

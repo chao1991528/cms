@@ -29,13 +29,28 @@ $(document).ready(function () {
             {"data": "xilie_names", "sClass": "text-center"},
             {"data": "price_once", "sClass": "text-center"},
             {"data": "price_liaocheng", "sClass": "text-center"},
+            {
+                "data": "is_recommend", 
+                "sClass": "text-center",
+                "render": function (data, type, full, meta) {
+                    var html = '<select class="select2" name="type" style="width: 60px;">';
+                    if(data == 1){
+                        html += '<option value="1" selected = "selected">是</option><option value="0">否</option>';
+                    }else{
+                        html += '<option value="1">是</option><option value="0" selected = "selected">否</option>';
+                    }
+                    html += '</select>';
+                    return html;
+                }, 
+                "bSortable": false
+            },
             {"data": "sort", "sClass": "text-center"}
         ],
         "aoColumnDefs": [
             { "sWidth": "5%", "aTargets": [0] },
             { "sWidth": "10%", "aTargets": [1] },
             {  
-                "targets": 9,  
+                "targets": 10,  
                 "searchable": false,
                 "sClass": "text-center",               
                 "sWidth": '10%',

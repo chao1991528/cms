@@ -20,6 +20,11 @@ class Product extends Model {
         return $this->belongsTo('ProductType', 'type');
     }
     
+    public function getIsRecommendAttr($value) {
+        $rs = [ 0 => '否', 1 => '是'];
+        return $rs[$value];
+    }
+    
     //添加产品
     public function saveData($data) {
         if (isset($data['id']) && !empty($data['id'])) {

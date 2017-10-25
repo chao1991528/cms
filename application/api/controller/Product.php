@@ -51,6 +51,7 @@ class Product extends ApiController {
                 $data[$k]['xilie_names'] = $xilie_names;
                 $data[$k]['price_once'] = $v->price_once;
                 $data[$k]['price_liaocheng'] = $v->price_all . '元/'. $v->all_need_ci . '次';
+                $data[$k]['is_recommend'] = $v->is_recommend;
                 $data[$k]['sort'] = $v->sort;
             }
         }
