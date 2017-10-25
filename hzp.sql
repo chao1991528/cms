@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : self
-Source Server Version : 100113
-Source Host           : localhost:3306
+Source Server         : 本机
+Source Server Version : 50617
+Source Host           : 127.0.0.1:3306
 Source Database       : hzp
 
 Target Server Type    : MYSQL
-Target Server Version : 100113
+Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-10-25 18:41:12
+Date: 2017-10-25 22:29:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,13 +35,43 @@ CREATE TABLE `z_appointment` (
   `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_appointment
 -- ----------------------------
 INSERT INTO `z_appointment` VALUES ('1', '110', '1', 'zyc', '13714432100', '1', '1', '1', '2017-10-20', '18:11:35', '分', '0', '2017-10-20 18:12:33', '2017-10-20 18:12:33');
 INSERT INTO `z_appointment` VALUES ('2', '', '0', '3er', '13714432150', '1', '1', '1', '2017-10-25', '09:20:00', 'fd', '0', '2017-10-25 09:21:01', '2017-10-25 09:21:01');
+INSERT INTO `z_appointment` VALUES ('5', '110', '1', 'zyc', '13714432100', '1', '1', '2', '2017-10-20', '18:11:35', '分', '0', '2017-10-20 18:12:33', '2017-10-20 18:12:33');
+
+-- ----------------------------
+-- Table structure for z_bg_img
+-- ----------------------------
+DROP TABLE IF EXISTS `z_bg_img`;
+CREATE TABLE `z_bg_img` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `bg_image` varchar(255) NOT NULL DEFAULT '' COMMENT '首页背景图',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of z_bg_img
+-- ----------------------------
+INSERT INTO `z_bg_img` VALUES ('1', '\\uploads\\indexBgImg\\20171021\\a8d3e88749da5acaf3611a2fe72781d1.jpg');
+
+-- ----------------------------
+-- Table structure for z_concept
+-- ----------------------------
+DROP TABLE IF EXISTS `z_concept`;
+CREATE TABLE `z_concept` (
+  `id` tinyint(4) NOT NULL,
+  `content` text NOT NULL COMMENT '品牌理念'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='品牌理念表';
+
+-- ----------------------------
+-- Records of z_concept
+-- ----------------------------
+INSERT INTO `z_concept` VALUES ('1', '日置の日美皮肤管理引进国内外最先进的理念、技术和产品，为中国女性提供专业的皮肤管理、形体管理、健康管理的指导和服务，为顾客实现健康美丽优雅于一身的新时代女性而不懈努力。 日置の日美的服务团队均有多年的皮肤管理经验，技术娴熟、手法精湛、服务优良，是您最贴心的皮肤管理专家。 日置の日美运用世界级的专业技术和产品及世间一切美丽元素，为懂得生活、具有成熟审美的现代女性提供全方位的身心滋养，客人可以通过皮肤管理、形体管理、健康管理、特色护理等美丽方案，得到由内而外的舒缓和改善。');
 
 -- ----------------------------
 -- Table structure for z_index_setting
@@ -142,8 +172,8 @@ INSERT INTO `z_product` VALUES ('19', 'test_P951', '\\uploads\\productLogo\\2017
 INSERT INTO `z_product` VALUES ('20', 'test_p4423', '\\uploads\\productLogo\\20171025\\e6fb4ec739d65e870efe497544679553.jpg', '5', 'yuan li ma I know', 'very good', 'all skin', 'nice', '50min', '1', '150', '400', '3', '0', '11', '2017-10-25 18:12:56', '2017-10-25 18:12:56');
 INSERT INTO `z_product` VALUES ('21', 'test_p4321', '\\uploads\\productLogo\\20171025\\00effbcdd124e901f918ff568b7fb012.png', '5', 'yuanli ........', 'perfect', 'skin all suit ', 'you can try it', '1h左右', '1', '200', '900', '5', '0', '6', '2017-10-25 18:14:32', '2017-10-25 18:14:32');
 INSERT INTO `z_product` VALUES ('22', 'test_p_6666', '\\uploads\\productLogo\\20171025\\8d2b9175ef0edfd1ddd13d54c5faaedc.jpg', '5', 'you know ', 'you got it', 'all pi fu', 'great ...', '1h', '1', '250', '600', '3', '0', '7', '2017-10-25 18:16:00', '2017-10-25 18:16:00');
-INSERT INTO `z_product` VALUES ('23', 'test_p_9527', '\\uploads\\productLogo\\20171025\\1767078fa004794b70c182ac73fd82a0.jpg', '5', 'yuan li ne', 'nice', 'wen ti ne ', 'xiaoguo ne ', '35min', '1', '120', '300', '3', '0', '7', '2017-10-25 18:17:28', '2017-10-25 18:17:28');
-INSERT INTO `z_product` VALUES ('24', 'test_p_38887', '\\uploads\\productLogo\\20171025\\8551fabeda125b808e265dd1767f2e12.jpg', '5', 'yuan li I don\'t care', 'very nice', 'all suitable', 'you need it ', '1.5h左右', '1', '300', '1100', '4', '0', '9', '2017-10-25 18:18:55', '2017-10-25 18:18:55');
+INSERT INTO `z_product` VALUES ('23', 'test_p_9527', '\\uploads\\productLogo\\20171025\\1767078fa004794b70c182ac73fd82a0.jpg', '5', 'yuan li ne', 'nice', 'wen ti ne ', 'xiaoguo ne ', '35min', '1', '120', '300', '3', '1', '7', '2017-10-25 18:17:28', '2017-10-25 21:31:09');
+INSERT INTO `z_product` VALUES ('24', 'test_p_38887', '\\uploads\\productLogo\\20171025\\8551fabeda125b808e265dd1767f2e12.jpg', '5', 'yuan li I don\'t care', 'very nice', 'all suitable', 'you need it ', '1.5h左右', '1', '300', '1100', '4', '1', '9', '2017-10-25 18:18:55', '2017-10-25 21:23:15');
 
 -- ----------------------------
 -- Table structure for z_product_type
@@ -183,7 +213,7 @@ CREATE TABLE `z_product_xilie` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of z_product_xilie
@@ -208,10 +238,30 @@ INSERT INTO `z_product_xilie` VALUES ('56', '21', '19', '2017-10-25 18:14:32', '
 INSERT INTO `z_product_xilie` VALUES ('57', '22', '1', '2017-10-25 18:16:00', '2017-10-25 18:16:00');
 INSERT INTO `z_product_xilie` VALUES ('58', '22', '11', '2017-10-25 18:16:00', '2017-10-25 18:16:00');
 INSERT INTO `z_product_xilie` VALUES ('59', '22', '13', '2017-10-25 18:16:00', '2017-10-25 18:16:00');
-INSERT INTO `z_product_xilie` VALUES ('60', '23', '1', '2017-10-25 18:17:28', '2017-10-25 18:17:28');
-INSERT INTO `z_product_xilie` VALUES ('61', '23', '8', '2017-10-25 18:17:28', '2017-10-25 18:17:28');
-INSERT INTO `z_product_xilie` VALUES ('62', '24', '1', '2017-10-25 18:18:55', '2017-10-25 18:18:55');
-INSERT INTO `z_product_xilie` VALUES ('63', '24', '13', '2017-10-25 18:18:55', '2017-10-25 18:18:55');
+INSERT INTO `z_product_xilie` VALUES ('64', '24', '1', '2017-10-25 21:23:16', '2017-10-25 21:23:16');
+INSERT INTO `z_product_xilie` VALUES ('65', '24', '13', '2017-10-25 21:23:16', '2017-10-25 21:23:16');
+INSERT INTO `z_product_xilie` VALUES ('66', '23', '1', '2017-10-25 21:31:09', '2017-10-25 21:31:09');
+INSERT INTO `z_product_xilie` VALUES ('67', '23', '8', '2017-10-25 21:31:09', '2017-10-25 21:31:09');
+INSERT INTO `z_product_xilie` VALUES ('68', '23', '13', '2017-10-25 21:31:09', '2017-10-25 21:31:09');
+
+-- ----------------------------
+-- Table structure for z_store
+-- ----------------------------
+DROP TABLE IF EXISTS `z_store`;
+CREATE TABLE `z_store` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '门店名字',
+  `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='门店表';
+
+-- ----------------------------
+-- Records of z_store
+-- ----------------------------
+INSERT INTO `z_store` VALUES ('1', '门店1', '1', '2017-10-25 21:43:28', '2017-10-25 22:22:23');
+INSERT INTO `z_store` VALUES ('2', '门店s', '10', '2017-10-25 21:43:48', '2017-10-25 22:22:15');
 
 -- ----------------------------
 -- Table structure for z_user
@@ -234,7 +284,7 @@ CREATE TABLE `z_user` (
 -- ----------------------------
 -- Records of z_user
 -- ----------------------------
-INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508830215');
+INSERT INTO `z_user` VALUES ('1', 'root', 'e10adc3949ba59abbe56e057f20f883e', 'woider', 'root@email.com', '0', '1', '127.0.0.1', '1508933839');
 INSERT INTO `z_user` VALUES ('2', 'fafffff', '7c222fb2927d828af22f592134e8932480637c0d', 'sg', 'gs@qq.com', '3', '1', null, null);
 INSERT INTO `z_user` VALUES ('3', 'rehg', '20eabe5d64b0e216796e834f52d61fd0b70332fc', '1234556', '544@qq.com', '3', '1', null, null);
 
@@ -273,4 +323,3 @@ INSERT INTO `z_xilie` VALUES ('16', 'xilie 15', '\\uploads\\xilieLogo\\20171020\
 INSERT INTO `z_xilie` VALUES ('17', 'xilie 16', '\\uploads\\xilieLogo\\20171020\\50e09f776c11a84c0af45334692d1a03.jpg', '10', '2017-10-20 15:32:48', '2017-10-20 15:32:48');
 INSERT INTO `z_xilie` VALUES ('18', 'xilie 17', '\\uploads\\xilieLogo\\20171020\\50e09f776c11a84c0af45334692d1a03.jpg', '3', '2017-10-21 19:11:04', '2017-10-21 19:11:04');
 INSERT INTO `z_xilie` VALUES ('19', 'xilie 18', '\\uploads\\xilieLogo\\20171020\\50e09f776c11a84c0af45334692d1a03.jpg', '4', '2017-10-22 19:34:35', '2017-10-22 19:34:35');
-SET FOREIGN_KEY_CHECKS=1;

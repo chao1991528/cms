@@ -28,7 +28,7 @@ class MemberLevel extends Validate {
     ];
     protected $message = [
         'name.require' => '会员等级名称必须',
-        'name.max' => '会员等级名称至少2个字符',
+        'name.min' => '会员等级名称至少2个字符',
         'name.max' => '会员等级名称最多不能超过50个字符',
         'name.unique' => '会员等级名称已经存在',
         'condition.require' => '入会条件必须填写',

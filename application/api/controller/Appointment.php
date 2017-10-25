@@ -14,8 +14,7 @@ class Appointment extends ApiController {
 //        $data = db('appointment')->order('sort desc')->select();
         $data = \app\api\model\Appointment::all();
         foreach ($data as &$v){
-            $v['store_name'] = $v['store_id'];
-            unset($v['store_id']);
+            $v['store_name'] = $v->store->name;
             $v['appoint_full_time'] = $v['appoint_date'] . ' ' . $v['appoint_time'];
             unset($v['appoint_date']);
             unset($v['appoint_time']);

@@ -31,6 +31,14 @@
                     </div>                
                 </li>
                 
+                <li {eq name="Request.controller" value="Store"} class="active"{/eq}>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="{eq name='Request.action' value='slist'}javascript:;{else/}{:url('admin/store/slist')}{/eq}">门店管理</a>
+                        <i></i>
+                    </div>                
+                </li>
+                
                 <li {eq name="Request.controller" value="Index"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>

@@ -22,7 +22,7 @@ class Appointment extends FrontController {
         $this->set_view($setView);
 
         $projects = db('product')->where('status', 1)->field('id,name')->select();
-        $stores = \app\api\model\Appointment::$stores;
+        $stores = db('product')->order('sort desc')->column('id,name');
 
         return view('appointAdd', ['projects' => $projects, 'stores' => $stores]);
     }
