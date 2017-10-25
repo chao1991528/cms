@@ -6,24 +6,53 @@ use app\api\common\ApiController;
 
 class Product extends ApiController {
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed' => ['except' => 'doPlist']
     ];
 
     //获取产品列表
     public function doPlist() {
-        $products = \app\api\model\Product::all(['status' => 1]);
-        $data = [];
-        foreach ($products as $k => $v){
-            $xilie_ids = $v->productXilie()->column('xilie_id');
-            $xilie_names = db('xilie')->where('id','in',$xilie_ids)->column('name');
-            $data[$k]['id'] = $v->id;
-            $data[$k]['name'] = $v->name;
-            $data[$k]['logo'] = $v->logo;
-            $data[$k]['type_name'] = $v->productType->name;
-            $data[$k]['xilie_names'] = $xilie_names;
-            $data[$k]['price_once'] = $v->price_once;
-            $data[$k]['price_liaocheng'] = $v->price_all . '元/'. $v->all_need_ci . '次';
-            $data[$k]['sort'] = $v->sort;
+        $p = input('post.page');
+        $pagesize = input('post.pagesize');
+        if($p && $pagesize){
+            $tid = input('post.tid');
+            $xid = input('post.xid');
+            if($tid){
+                $data = db('product')->alias('a')
+                                     ->field('a.id,a.name,b.name as tname,a.logo')
+                                     ->join('__PRODUCT_TYPE__ b','a.type = b.id')
+                                     ->where(['status'=>1, 'type'=>$tid])
+                                     ->limit($p*$pagesize, $pagesize)
+                                     ->order('a.sort desc')
+                                     ->select();
+            }
+            if($xid){
+                $data = db('product')->alias('a')
+                                     ->field('a.id,a.name,b.name as tname,a.logo')
+                                     ->join('__PRODUCT_TYPE__ b','a.type = b.id')
+                                     ->join('__PRODUCT_XILIE__ c', 'a.id = c.product_id')
+                                     ->where(['status'=>1, 'xilie_id'=>$xid])
+                                     ->limit($p*$pagesize, $pagesize)
+                                     ->order('a.sort desc')
+                                     ->select();
+            }           
+            foreach ($data as &$v){
+                $v['url'] = url('front/product/pdetail', 'id='.$v['id']);
+            }
+        }else{
+            $products = \app\api\model\Product::all(['status' => 1]);
+            $data = [];
+            foreach ($products as $k => $v){
+                $xilie_ids = $v->productXilie()->column('xilie_id');
+                $xilie_names = db('xilie')->where('id','in',$xilie_ids)->column('name');
+                $data[$k]['id'] = $v->id;
+                $data[$k]['name'] = $v->name;
+                $data[$k]['logo'] = $v->logo;
+                $data[$k]['type_name'] = $v->productType->name;
+                $data[$k]['xilie_names'] = $xilie_names;
+                $data[$k]['price_once'] = $v->price_once;
+                $data[$k]['price_liaocheng'] = $v->price_all . '元/'. $v->all_need_ci . '次';
+                $data[$k]['sort'] = $v->sort;
+            }
         }
         return $this->resData($data);
     }

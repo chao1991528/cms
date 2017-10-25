@@ -24,16 +24,6 @@ $(function () {
             $('.number').hide();
         }
     });
-    /*layer弹框*/
-    function layer(text) {
-        $('#layer').remove();
-        var layer = ('<div id="layer" class="layer"><div>' + text + '</div></div>');
-        $('body').append(layer);
-        var time = setInterval(function () {
-            $('#layer').fadeOut();
-            clearInterval(time);
-        }, 1500);//1.5s后自动隐藏
-    }
     $('.submitBtn').on('click', function () {
         var userName = $('#userName').val();        
         var phoneNumber = $('#phoneNumber').val();
@@ -43,7 +33,7 @@ $(function () {
         var time = $('#time-of-appointment').val();
         var specificTime = $('#specific-time').val();
         var parr = /^(13[0-9]|15[0-9]|17[03678]|18[0-9]|14[57])[0-9]{8}$/;        
-        if (userName && parr.test(phoneNumber) && person_num  && project && store && time && specificTime ) {
+        if ( userName && parr.test(phoneNumber) && person_num  && project && store && time && specificTime ) {
             var url = $('#appointmentForm').attr('action');
             $.post(url, $('#appointmentForm').serialize(), function (data) {
                 if (data.code === 200) {

@@ -12,13 +12,14 @@ class Product extends Model {
     protected $autoWriteTimestamp = 'datetime';
 
     public function productXilie() {
-        return $this->hasMany('ProductXilie', 'product_id');
+//        return $this->hasMany('ProductXilie', 'product_id');
+        return $this->belongsToMany('Xilie', 'product_xilie', 'xilie_id', 'product_id');
     }
 
     public function productType() {
         return $this->belongsTo('ProductType', 'type');
     }
-
+    
     //添加产品
     public function saveData($data) {
         if (isset($data['id']) && !empty($data['id'])) {
