@@ -19,7 +19,8 @@ class Product extends Validate {
         'price_once' => 'require|number',
         'price_all' => 'number',
         'all_need_ci' => 'number',
-        'sort' => 'number'
+        'sort' => 'number',
+        'is_recommend' => 'in:0,1'
     ];
     protected $message = [
         'name.require' => '产品名称必须',
@@ -37,20 +38,22 @@ class Product extends Validate {
         'price_once.number' => '单次价格必须为数字',
         'price_all.number' => '疗程价格必须为数字',
         'all_need_ci.number' => '疗程价格中的次数必须为数字',
-        'sort.number' => '排序必须为数字'
+        'sort.number' => '排序必须为数字',
+        'is_recommend.in' => '是否推荐有误'
     ];
     protected $scene = [
         'edit' => [
             'name' => 'require|min:2|max:50',
-            'logo' => 'require|max:255',
-            'type' => 'require|number',
-            'xilie' => 'require',
-            'guocheng' => 'max:255',
-            'huli_time' => 'max:20',
-            'price_once' => 'require|number',
-            'price_all' => 'number',
-            'all_need_ci' => 'number',
-            'sort' => 'number'
+            'logo',
+            'type',
+            'xilie',
+            'guocheng',
+            'huli_time',
+            'price_once',
+            'price_all',
+            'all_need_ci',
+            'sort',
+            'is_recommend'
         ]
     ];
 

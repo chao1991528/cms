@@ -29,13 +29,14 @@ $(document).ready(function () {
             {"data": "xilie_names", "sClass": "text-center"},
             {"data": "price_once", "sClass": "text-center"},
             {"data": "price_liaocheng", "sClass": "text-center"},
+            { "data": "is_recommend", "sClass": "text-center","bSortable": false},
             {"data": "sort", "sClass": "text-center"}
         ],
         "aoColumnDefs": [
             { "sWidth": "5%", "aTargets": [0] },
             { "sWidth": "10%", "aTargets": [1] },
             {  
-                "targets": 9,  
+                "targets": 10,  
                 "searchable": false,
                 "sClass": "text-center",               
                 "sWidth": '10%',
@@ -54,7 +55,7 @@ $(document).ready(function () {
     $(".select2").uedSelect({
             width : 167
     });
-    
+       
     //普通图片上传
     var uploadInst = upload.render({
         elem: '#productLogo',
@@ -84,7 +85,7 @@ $(document).ready(function () {
             });
         }
     });
-    
+       
     //添加页面点击添加按钮
     $('.submitBtn').click(function(){
         var isEdit = $(".forminfo input[name='id']").val().length;
@@ -153,6 +154,7 @@ $(document).ready(function () {
                         $(".forminfo textarea[name='pifu_problem']").val(data.data['pifu_problem']);
                         $(".forminfo textarea[name='huli_gongxiao']").val(data.data['huli_gongxiao']);
                         $(".forminfo input[name='sort']").val(data.data['sort']);
+                        $(".forminfo input[name='is_recommend'][value='"+ data.data['is_recommend'] +"']").attr("checked",true); 
                         $('#uploaded').attr('src', data.data['logo']);
                     } else {
                         layer.msg(data.message, {time: 1500});

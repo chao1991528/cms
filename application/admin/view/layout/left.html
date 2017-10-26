@@ -31,20 +31,28 @@
                     </div>                
                 </li>
                 
-                <li {eq name="Request.controller" value="Index"} class="active open"{/eq}>
+                <li {eq name="Request.controller" value="Store"} class="active"{/eq}>
                     <div class="header">
                         <cite></cite>
-                        <a href="javascript:;">首页管理</a>
+                        <a href="{eq name='Request.action' value='slist'}javascript:;{else/}{:url('admin/store/slist')}{/eq}">门店管理</a>
+                        <i></i>
+                    </div>                
+                </li>
+                
+                <li {eq name="Request.controller" value="Index"} class="active"{/eq}>
+                    <div class="header">
+                        <cite></cite>
+                        <a href="{eq name='Request.action' value='indexset'}javascript:;{else/}{:url('admin/index/indexSet')}{/eq}">前台首页管理</a>
                         <i></i>
                     </div>
-                    <ul class="sub-menus" {eq name="Request.controller" value="Index"}style="display:block" {/else}class="hidden"{/eq}>
+<!--                    <ul class="sub-menus" {eq name="Request.controller" value="Index"}style="display:block" {/else}class="hidden"{/eq}>
                         <li {eq name='Request.action' value='bgimage'}class="active"{/eq}>
                             <a href="{eq name='Request.action' value='bgimage'}javascript:;{else/}{:url('admin/index/bgimage')}{/eq}">背景管理</a>
                         </li>
                         <li {eq name='Request.action' value='concept'}class="active"{/eq}>
                             <a href="{eq name='Request.action' value='concept'}javascript:;{else/}{:url('admin/index/concept')}{/eq}">产品理念管理</a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </li>
                                 
                 

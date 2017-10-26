@@ -6,12 +6,21 @@ use app\api\common\ApiController;
 
 class Xilie extends ApiController {
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed' => ['except' => 'doXlist']
     ];
 
     //获取产品系列列表
     public function doXlist() {
-        $data = db('Xilie')->order('sort desc')->select();
+        $p = input('post.page');
+        $pagesize = input('post.pagesize');
+        if($p && $pagesize){
+            $data = db('Xilie')->limit($p*$pagesize, $pagesize)->order('sort desc')->select();
+            foreach ($data as &$v){
+                $v['url'] = url('front/product/plist', 'xid='.$v['id']);
+            }
+        }else{
+            $data = db('Xilie')->order('sort desc')->select();
+        }
         return $this->resData($data);
     }
     

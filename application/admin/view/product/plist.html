@@ -26,6 +26,7 @@
                         <th>产品系列</th>
                         <th>单次价</th>
                         <th>疗程价格</th>
+                        <th>推荐</th>
                         <th>排序</th>
                         <th class="text-center">操作</th>
                     </tr>
@@ -91,7 +92,7 @@
             </li>
             <li>
                 <label>治疗原理</label>
-                <textarea name="yuanli" cols="" rows="" class="textinput2" placeholder='如果有多条，请用"|"隔开'></textarea><b></b>
+                <textarea name="yuanli" cols="" rows="" class="textinput2"></textarea><b></b>
             </li>
             <li>
                 <label>肌肤问题</label>
@@ -104,6 +105,13 @@
             <li>
                 <label>排序</label>
                 <input name="sort" type="text" class="dfinput" placeholder="数值越大越靠前，不填默认0" value=""/><b></b>
+            </li>
+            <li>
+                <label>是否审核</label>
+                <cite>
+                    <input name="is_recommend" type="radio" value="1"/>是&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="is_recommend" type="radio" value="0" checked="checked"/>否
+                </cite>
             </li>
             <li style="margin-top: 25px;margin-bottom: 40px;">
                 <input type="button" class="btn btn-primary submitBtn" value=""/>

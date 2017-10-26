@@ -50,29 +50,16 @@ class Index extends AdminController
     }
     
     /**
-     * 品牌理念
+     * 前台首页设置
      */
-    public function concept() {
+    public function indexSet() {
         $setView = [
             'css' => ['style'],
-            'js'  => ['concept']
+            'js' => ['indexSet']
         ];
         $this->set_view($setView);
-        $content = db('concept')->where('id', 1)->value('content');
-        return view('concept',['content'=>$content]);
-    }
-    
-    /**
-     * 首页背景图
-     */
-    public function bgImage() {
-        $setView = [
-            'css' => ['style'],
-            'js'  => ['index_bg']
-        ];
-        $this->set_view($setView);
-        $img = db('bgImg')->where('id', 1)->value('bg_image');
-        return view('bgImage',['img'=>$img]);
+        $setting = db('indexSetting')->where('id', 1)->find();
+        return view('indexSet', ['concept' => $setting['concept'], 'bg_img' => $setting['bg_img'], 'comment_url' => $setting['comment_url']]);
     }
     
 }

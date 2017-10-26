@@ -6,12 +6,21 @@ use app\api\common\ApiController;
 
 class Type extends ApiController {
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed' => ['except' => 'doTlist']
     ];
 
     //获取产品类型列表
     public function doTlist() {
-        $data = db('ProductType')->order('sort desc')->select();
+        $p = input('post.page');
+        $pagesize = input('post.size');
+        if($p && $pagesize){
+            $data = db('ProductType')->limit( $p*$pagesize, $pagesize )->order('sort desc')->select();
+            foreach ($data as &$v){
+                $v['url'] = url('front/product/plist', 'tid='.$v['id']);
+            }
+        }else{
+            $data = db('ProductType')->order('sort desc')->select();
+        }        
         return $this->resData($data);
     }
     

@@ -6,7 +6,7 @@ use app\api\common\ApiController;
 
 class Appointment extends ApiController {
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed' => ['except' => 'doAddAppointment']
     ];
 
     //获取预约列表
@@ -14,8 +14,7 @@ class Appointment extends ApiController {
 //        $data = db('appointment')->order('sort desc')->select();
         $data = \app\api\model\Appointment::all();
         foreach ($data as &$v){
-            $v['store_name'] = $v['store_id'];
-            unset($v['store_id']);
+            $v['store_name'] = $v->store->name;
             $v['appoint_full_time'] = $v['appoint_date'] . ' ' . $v['appoint_time'];
             unset($v['appoint_date']);
             unset($v['appoint_time']);
@@ -37,19 +36,18 @@ class Appointment extends ApiController {
     }
     
     //添加预约
-    public function doAddAppointment(){
+    public function doAddAppointment() {
         //获取参数并验证
         $data = input('post.');
-        $result = $this->validate($data,'appointment.add');
-        if(true !== $result){
+        $result = $this->validate($data, 'Appointment');
+        if (true !== $result) {
             return $this->resMes('444', $result);
         }
-        $productType = model('appointment');
-        $res = $productType->saveData($data);
-        //还有日志操作undo
-        return $res?$this->resMes(200):$this->resMes(400);
+        
+        $res = model('appointment')->saveData($data);
+        return $res ? $this->resMes(200) : $this->resMes(400);
     }
-    
+
     //编辑预约
     public function doEditAppointment() {
         $data = input('post.');
