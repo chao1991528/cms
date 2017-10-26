@@ -6,7 +6,7 @@ use app\api\common\ApiController;
 
 class Appointment extends ApiController {
     protected $beforeActionList = [
-        'loginNeed'
+        'loginNeed' => ['except' => 'doAddAppointment']
     ];
 
     //获取预约列表

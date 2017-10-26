@@ -3,7 +3,6 @@
 namespace app\front\controller;
 
 use app\front\common\FrontController;
-use think\Db;
 
 class Product extends FrontController {
 
