@@ -14,7 +14,7 @@ class Product extends FrontController {
     public function xilies() {
         $setView = [
             'title' => '产品系列列表',
-            'js' => ['iscroll','xilies'],
+            'js' => ['iscroll', 'scroll_common','xilies'],
             'css' => ['scrollbar','xilies']
         ];
         $this->set_view($setView);
@@ -27,7 +27,7 @@ class Product extends FrontController {
     public function types() {
         $setView = [
             'title' => '产品类型列表',
-            'js' => ['iscroll', 'types'],
+            'js' => ['iscroll','scroll_common', 'types'],
             'css' => ['scrollbar', 'xilies']
         ];
         $this->set_view($setView);
@@ -40,7 +40,7 @@ class Product extends FrontController {
     public function plist(){
         $setView = [
             'title' => '产品列表',
-            'js' => ['iscroll', 'plist'],
+            'js' => ['iscroll', 'scroll_common' ,'plist'],
             'css' => ['scrollbar', 'xilies']
         ];
         $this->set_view($setView);
