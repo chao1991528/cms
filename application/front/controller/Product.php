@@ -33,7 +33,7 @@ class Product extends FrontController {
         $this->set_view($setView);
 
         $xilies = db('productType')->order('sort desc')->limit(8)->column('id,name,logo');
-        return view('xilies', ['xilies' => $xilies]);
+        return view('types', ['xilies' => $xilies]);
     }
     
     //产品列表页
