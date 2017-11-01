@@ -19,6 +19,7 @@ function pullUpAction() {
                 html +='<li><a href="' + item.url + '" class="clearBoth"><div class="series-picture"><img src="' + item.logo + '" alt=""></div><div class="series-title series-o">' + item.name + '</div><div class="series-in"><img src="/static/front/images/right.png" alt=""></div></a></li>';
             });
             $('#thelist').append(html);
+            myScroll.refresh();
         } else if(data.code === 201){ 
             layer('没有更多了！');
         }else{
